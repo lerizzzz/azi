@@ -1,0 +1,7 @@
+# Sources and rights
+
+- Character canonical artwork, character part textures, UFO, props, Kazan/courtyard backgrounds: recovered from user-designated repository lerizzzz/azi, commit d5dfd44df407509bd39488e7eff3d8ee8a2238d0, review-delivery/scenes-01-02-sources.zip. Prior source manifest identifies these as image_gen-derived artwork. Reused as user project materials; no new claim of authorship over the recovered images. No frames of rejected old MP4s used in the new movie.
+- New scene architecture, map (schematic, not a geographic survey), studio, lettering layouts, footwear, rig corrections, music and sound effects: procedural project code in this delivery. Studio and entrance are stylized reconstructions from the user's written brief, not verified replicas of WELL or the actual studio photos. Those photos were not present in recovered materials.
+- Neucha: Jovanny Lemonad, SIL Open Font License, public/fonts/OFL.txt. Embedded locally with Cyrillic.
+- Speech: RHVoice, https://github.com/RHVoice/RHVoice ; Russian language and Elena voice from official pinned submodules. Free local synthesis. See licenses/RHVoice-LICENSE.md and licenses/Elena-README.md (GPL v3). This is temporary synthetic narration, not professional acting. Original text is user-supplied.
+- Remotion 4.0.539 and React: package-lock.json contains exact installed dependencies. No paid voice API, subscription, stock music, remote font, or external credit service used.

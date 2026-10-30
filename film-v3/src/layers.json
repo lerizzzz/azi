@@ -1,0 +1,373 @@
+{
+  "azi/head-neutral": {
+    "file": "azi/head-neutral.png",
+    "width": 554,
+    "height": 588,
+    "source": "azi/heads-atlas.png",
+    "sourceCrop": [78, 20, 554, 588]
+  },
+  "azi/head-blink": {
+    "file": "azi/head-blink.png",
+    "width": 557,
+    "height": 589,
+    "source": "azi/heads-atlas.png",
+    "sourceCrop": [648, 21, 557, 589]
+  },
+  "azi/head-surprise": {
+    "file": "azi/head-surprise.png",
+    "width": 560,
+    "height": 584,
+    "source": "azi/heads-atlas.png",
+    "sourceCrop": [78, 634, 560, 584]
+  },
+  "azi/head-irritated": {
+    "file": "azi/head-irritated.png",
+    "width": 558,
+    "height": 587,
+    "source": "azi/heads-atlas.png",
+    "sourceCrop": [653, 633, 558, 587]
+  },
+  "azi/torso": {
+    "file": "azi/torso.png",
+    "width": 350,
+    "height": 533,
+    "source": "azi/body-atlas.png",
+    "sourceCrop": [148, 39, 350, 533]
+  },
+  "azi/hair-back": {
+    "file": "azi/hair-back.png",
+    "width": 380,
+    "height": 590,
+    "source": "azi/body-atlas.png",
+    "sourceCrop": [585, 16, 380, 590]
+  },
+  "azi/arm-left-upper": {
+    "file": "azi/arm-left-upper.png",
+    "width": 119,
+    "height": 374,
+    "source": "azi/body-atlas.png",
+    "sourceCrop": [261, 612, 119, 374]
+  },
+  "azi/arm-left-lower": {
+    "file": "azi/arm-left-lower.png",
+    "width": 133,
+    "height": 425,
+    "source": "azi/body-atlas.png",
+    "sourceCrop": [671, 610, 133, 425]
+  },
+  "azi/arm-right-upper": {
+    "file": "azi/arm-right-upper.png",
+    "width": 116,
+    "height": 381,
+    "source": "azi/body-atlas.png",
+    "sourceCrop": [278, 1045, 116, 381]
+  },
+  "azi/arm-right-lower": {
+    "file": "azi/arm-right-lower.png",
+    "width": 131,
+    "height": 456,
+    "source": "azi/body-atlas.png",
+    "sourceCrop": [684, 1049, 131, 456]
+  },
+  "man/head-neutral": {
+    "file": "man/head-neutral.png",
+    "width": 335,
+    "height": 412,
+    "source": "man/body-atlas.png",
+    "sourceCrop": [148, 8, 335, 412]
+  },
+  "man/head-surprise": {
+    "file": "man/head-surprise.png",
+    "width": 335,
+    "height": 412,
+    "source": "man/body-atlas.png",
+    "sourceCrop": [627, 8, 335, 412]
+  },
+  "man/torso": {
+    "file": "man/torso.png",
+    "width": 447,
+    "height": 561,
+    "source": "man/body-atlas.png",
+    "sourceCrop": [122, 453, 447, 561]
+  },
+  "man/arm-upper": {
+    "file": "man/arm-upper.png",
+    "width": 180,
+    "height": 447,
+    "source": "man/body-atlas.png",
+    "sourceCrop": [721, 495, 180, 447]
+  },
+  "man/arm-grip": {
+    "file": "man/arm-grip.png",
+    "width": 205,
+    "height": 449,
+    "source": "man/body-atlas.png",
+    "sourceCrop": [216, 1033, 205, 449]
+  },
+  "man/arm-open": {
+    "file": "man/arm-open.png",
+    "width": 296,
+    "height": 485,
+    "source": "man/body-atlas.png",
+    "sourceCrop": [696, 1030, 296, 485]
+  },
+  "azi/leg-left-upper": {
+    "file": "azi/leg-left-upper.png",
+    "width": 196,
+    "height": 359,
+    "source": "legs-atlas.png",
+    "sourceCrop": [209, 4, 196, 359]
+  },
+  "azi/leg-right-upper": {
+    "file": "azi/leg-right-upper.png",
+    "width": 204,
+    "height": 360,
+    "source": "legs-atlas.png",
+    "sourceCrop": [617, 4, 204, 360]
+  },
+  "azi/leg-left-lower": {
+    "file": "azi/leg-left-lower.png",
+    "width": 245,
+    "height": 393,
+    "source": "legs-atlas.png",
+    "sourceCrop": [160, 368, 245, 393]
+  },
+  "azi/leg-right-lower": {
+    "file": "azi/leg-right-lower.png",
+    "width": 255,
+    "height": 397,
+    "source": "legs-atlas.png",
+    "sourceCrop": [609, 363, 255, 397]
+  },
+  "man/leg-left-upper": {
+    "file": "man/leg-left-upper.png",
+    "width": 181,
+    "height": 327,
+    "source": "legs-atlas.png",
+    "sourceCrop": [211, 766, 181, 327]
+  },
+  "man/leg-right-upper": {
+    "file": "man/leg-right-upper.png",
+    "width": 183,
+    "height": 329,
+    "source": "legs-atlas.png",
+    "sourceCrop": [631, 766, 183, 329]
+  },
+  "man/leg-left-lower": {
+    "file": "man/leg-left-lower.png",
+    "width": 237,
+    "height": 422,
+    "source": "legs-atlas.png",
+    "sourceCrop": [130, 1098, 237, 422]
+  },
+  "man/leg-right-lower": {
+    "file": "man/leg-right-lower.png",
+    "width": 242,
+    "height": 425,
+    "source": "legs-atlas.png",
+    "sourceCrop": [655, 1098, 242, 425]
+  },
+  "azi/arm-left-full": {
+    "file": "azi/arm-left-full.png",
+    "width": 151,
+    "height": 695,
+    "source": "azi/continuous-atlas.png",
+    "sourceCrop": [269, 18, 151, 695]
+  },
+  "azi/arm-right-full": {
+    "file": "azi/arm-right-full.png",
+    "width": 147,
+    "height": 693,
+    "source": "azi/continuous-atlas.png",
+    "sourceCrop": [557, 19, 147, 693]
+  },
+  "azi/leg-left-full": {
+    "file": "azi/leg-left-full.png",
+    "width": 304,
+    "height": 943,
+    "source": "azi/continuous-atlas.png",
+    "sourceCrop": [107, 720, 304, 943]
+  },
+  "azi/leg-right-full": {
+    "file": "azi/leg-right-full.png",
+    "width": 269,
+    "height": 927,
+    "source": "azi/continuous-atlas.png",
+    "sourceCrop": [566, 721, 269, 927]
+  },
+  "man/arm-grip-full": {
+    "file": "man/arm-grip-full.png",
+    "width": 164,
+    "height": 668,
+    "source": "man/continuous-atlas.png",
+    "sourceCrop": [213, 16, 164, 668]
+  },
+  "man/arm-open-full": {
+    "file": "man/arm-open-full.png",
+    "width": 269,
+    "height": 693,
+    "source": "man/continuous-atlas.png",
+    "sourceCrop": [642, 16, 269, 693]
+  },
+  "man/leg-left-full": {
+    "file": "man/leg-left-full.png",
+    "width": 222,
+    "height": 798,
+    "source": "man/continuous-atlas.png",
+    "sourceCrop": [194, 720, 222, 798]
+  },
+  "man/leg-right-full": {
+    "file": "man/leg-right-full.png",
+    "width": 229,
+    "height": 799,
+    "source": "man/continuous-atlas.png",
+    "sourceCrop": [609, 721, 229, 799]
+  },
+  "alien/head": {
+    "file": "alien/head.png",
+    "width": 300,
+    "height": 438,
+    "source": "alien/atlas.png",
+    "sourceCrop": [179, 13, 300, 438]
+  },
+  "alien/torso": {
+    "file": "alien/torso.png",
+    "width": 266,
+    "height": 407,
+    "source": "alien/atlas.png",
+    "sourceCrop": [594, 51, 266, 407]
+  },
+  "alien/arm-left-full": {
+    "file": "alien/arm-left-full.png",
+    "width": 104,
+    "height": 488,
+    "source": "alien/atlas.png",
+    "sourceCrop": [256, 458, 104, 488]
+  },
+  "alien/arm-right-full": {
+    "file": "alien/arm-right-full.png",
+    "width": 128,
+    "height": 489,
+    "source": "alien/atlas.png",
+    "sourceCrop": [671, 458, 128, 489]
+  },
+  "alien/leg-left-full": {
+    "file": "alien/leg-left-full.png",
+    "width": 120,
+    "height": 570,
+    "source": "alien/atlas.png",
+    "sourceCrop": [260, 943, 120, 570]
+  },
+  "alien/leg-right-full": {
+    "file": "alien/leg-right-full.png",
+    "width": 122,
+    "height": 571,
+    "source": "alien/atlas.png",
+    "sourceCrop": [646, 943, 122, 571]
+  },
+  "lera/head-closed": {
+    "file": "lera/head-closed.png",
+    "width": 419,
+    "height": 401,
+    "source": "lera/atlas.png",
+    "sourceCrop": [96, 10, 419, 401]
+  },
+  "lera/head-open": {
+    "file": "lera/head-open.png",
+    "width": 416,
+    "height": 403,
+    "source": "lera/atlas.png",
+    "sourceCrop": [552, 8, 416, 403]
+  },
+  "lera/torso": {
+    "file": "lera/torso.png",
+    "width": 462,
+    "height": 590,
+    "source": "lera/atlas.png",
+    "sourceCrop": [136, 424, 462, 590]
+  },
+  "lera/arm-left-full": {
+    "file": "lera/arm-left-full.png",
+    "width": 213,
+    "height": 642,
+    "source": "lera/atlas.png",
+    "sourceCrop": [690, 433, 213, 642]
+  },
+  "lera/arm-right-full": {
+    "file": "lera/arm-right-full.png",
+    "width": 279,
+    "height": 478,
+    "source": "lera/atlas.png",
+    "sourceCrop": [213, 1032, 279, 478]
+  },
+  "props/mirror": {
+    "file": "props/mirror.png",
+    "width": 192,
+    "height": 352,
+    "source": "lera/atlas.png",
+    "sourceCrop": [640, 1139, 192, 352]
+  },
+  "master/head-neutral": {
+    "file": "master/head-neutral.png",
+    "width": 273,
+    "height": 472,
+    "source": "master/atlas.png",
+    "sourceCrop": [166, 12, 273, 472]
+  },
+  "master/head-speaking": {
+    "file": "master/head-speaking.png",
+    "width": 274,
+    "height": 471,
+    "source": "master/atlas.png",
+    "sourceCrop": [635, 13, 274, 471]
+  },
+  "master/torso": {
+    "file": "master/torso.png",
+    "width": 445,
+    "height": 578,
+    "source": "master/atlas.png",
+    "sourceCrop": [73, 498, 445, 578]
+  },
+  "master/arm-left-full": {
+    "file": "master/arm-left-full.png",
+    "width": 311,
+    "height": 654,
+    "source": "master/atlas.png",
+    "sourceCrop": [649, 487, 311, 654]
+  },
+  "master/arm-right-full": {
+    "file": "master/arm-right-full.png",
+    "width": 515,
+    "height": 380,
+    "source": "master/atlas.png",
+    "sourceCrop": [48, 1092, 515, 380]
+  },
+  "props/tweezers": {
+    "file": "props/tweezers.png",
+    "width": 286,
+    "height": 312,
+    "source": "master/atlas.png",
+    "sourceCrop": [647, 1174, 286, 312]
+  },
+  "props/ufo": {
+    "file": "props/ufo.png",
+    "width": 915,
+    "height": 378,
+    "source": "props/props-atlas.png",
+    "sourceCrop": [12, 115, 915, 378]
+  },
+  "props/phone": {
+    "file": "props/phone.png",
+    "width": 274,
+    "height": 486,
+    "source": "props/props-atlas.png",
+    "sourceCrop": [355, 653, 274, 486]
+  },
+  "world/railing": {
+    "file": "world/railing.png",
+    "width": 914,
+    "height": 460,
+    "source": "props/props-atlas.png",
+    "sourceCrop": [13, 1138, 914, 460]
+  }
+}

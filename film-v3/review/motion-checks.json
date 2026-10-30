@@ -1,0 +1,6 @@
+{
+  "sampled_positions": 1602,
+  "max_bone_length_error": 1.7053025658242404e-13,
+  "max_world_stance_drift_per_ms": 1.7053025658242404e-13,
+  "scope": "Numeric IK and stance model only; not a substitute for rendered motion review."
+}

@@ -1,0 +1,10 @@
+node_modules/
+.remotion/
+build/
+review/*.png
+review/*.log
+review/frames/
+out/
+review/*.mp4
+review/decoded/
+**/__pycache__/
