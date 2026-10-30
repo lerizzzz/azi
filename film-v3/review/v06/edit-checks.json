@@ -1,0 +1,27 @@
+{
+  "duration": 88,
+  "frames": 2640,
+  "shots": 46,
+  "continuousTimeline": true,
+  "minShotSeconds": 1.4399999999999977,
+  "maxShotSeconds": 2.5799999999999983,
+  "artworkExists": true,
+  "cases": {
+    "heldPhone": "man-surprise",
+    "releasedPhone": "man-lift",
+    "openEyes": "azi-bare",
+    "closedEyes": "azi-blink",
+    "speaking": "azi-ear-speaking",
+    "restingMouth": "azi-ear",
+    "alienQuestion": "alien-question",
+    "startled": "azi-startled",
+    "relief": "azi-relief"
+  },
+  "walk": [
+    "walk-0",
+    "walk-1",
+    "walk-2",
+    "walk-3"
+  ],
+  "scope": "Checks authored timing and asset bindings. Does not certify perceived acting, anatomy, accent or natural gait."
+}
