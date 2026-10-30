@@ -1,6 +1,7 @@
 from pathlib import Path
 import subprocess,json
 R=Path(__file__).resolve().parents[1]
+(R/'out').mkdir(exist_ok=True)
 def run(a):subprocess.run(a,cwd=R,check=True)
 run(['ffmpeg','-y','-i','review/picture.mp4','-i','public/mix.wav','-map','0:v:0','-map','1:a:0','-c:v','copy','-c:a','aac','-b:a','160k','-af','loudnorm=I=-16:TP=-1.5:LRA=11','-ar','48000','-movflags','+faststart','out/azi-lashes-film-1080.mp4'])
 run(['ffmpeg','-y','-i','out/azi-lashes-film-1080.mp4','-vf','scale=540:960','-c:v','libx264','-crf','25','-preset','medium','-pix_fmt','yuv420p','-c:a','aac','-b:a','96k','-movflags','+faststart','out/azi-lashes-film-phone.mp4'])

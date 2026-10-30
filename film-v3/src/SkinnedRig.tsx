@@ -10,9 +10,9 @@ type V = { x: number; y: number };
 type Asset = { file: string; width: number; height: number };
 const assets: Record<string, Asset> = {
   ...json,
-  "props/cup": {file:"props/cup.png",width:160,height:160},
-  "props/foot": {file:"props/foot.png",width:140,height:75},
-  "props/shoes": {file:"props/shoes.png",width:240,height:230},
+  "props/cup": { file: "props/cup.png", width: 160, height: 160 },
+  "props/foot": { file: "props/foot.png", width: 140, height: 75 },
+  "props/shoes": { file: "props/shoes.png", width: 240, height: 230 },
   "azi/hair-frame": { file: "azi/hair-frame.png", width: 941, height: 1672 },
 };
 const clamp = (x: number) => Math.max(0, Math.min(1, x));
@@ -86,7 +86,10 @@ export const SkinnedRig: React.FC<RigProps> = (props) => {
     let dispose = () => {};
     const ids = Object.keys(assets).filter(
       (id) =>
-        id === "props/phone" || id === "props/shoes" || id === "props/foot" || id === "props/cup" ||
+        id === "props/phone" ||
+        id === "props/shoes" ||
+        id === "props/foot" ||
+        id === "props/cup" ||
         id === props.who + "/hair-frame" ||
         (id.startsWith(props.who + "/") &&
           (id.includes("-full") ||
@@ -166,7 +169,7 @@ export const SkinnedRig: React.FC<RigProps> = (props) => {
           gl.useProgram(prog);
           gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
           const running = p.action === "run";
-          const phase = p.time * 2 * Math.PI / 0.8 + (p.phase ?? 0);
+          const phase = (p.time * 2 * Math.PI) / 0.8 + (p.phase ?? 0);
           const bounce = running ? -Math.abs(Math.sin(phase)) * 10 : 0;
           const angle = rad(
               (p.rotation ?? 0) + (running ? Math.sin(phase) * 1.1 : 0),
@@ -292,7 +295,12 @@ export const SkinnedRig: React.FC<RigProps> = (props) => {
             };
             for (let j = 0; j < rows; j++)
               for (let i = 0; i < cols; i++) {
-                if(foot && p.barefoot && (j+1)/rows*a.height > end.y+4) continue;
+                if (
+                  foot &&
+                  p.barefoot &&
+                  ((j + 1) / rows) * a.height > end.y + 4
+                )
+                  continue;
                 vert(i, j);
                 vert(i + 1, j);
                 vert(i + 1, j + 1);
@@ -378,21 +386,49 @@ export const SkinnedRig: React.FC<RigProps> = (props) => {
             lift = p.lift ?? 0;
           const walking = (p.walking ?? false) || running;
           const legs = (who: string) => {
-            const leftA = {x:-67,y:who==="man"?-75:-100}, rightA={x:67,y:who==="man"?-75:-100};
-            const foot = (offset:number,side:number) => {
-              if(!walking) return {x:side*82+lift*side*50,y:500-lift*(side>0?120:55)-bounce};
+            const leftA = { x: -67, y: who === "man" ? -75 : -100 },
+              rightA = { x: 67, y: who === "man" ? -75 : -100 };
+            const foot = (offset: number, side: number) => {
+              if (!walking)
+                return {
+                  x: side * 82 + lift * side * 50,
+                  y: 500 - lift * (side > 0 ? 120 : 55) - bounce,
+                };
               // 0.8s cycle, 60% stance. Foot is stationary in world during contact:
               // body speed = 200/0.48=416.666 local units/sec.
-              const u=((p.time/0.8+offset)%1+1)%1;
-              if(u<0.6) return {x:side*45+100-u/0.6*200,y:500-bounce};
-              const v=(u-0.6)/0.4;
-              return {x:side*45-100+200*smooth(v),y:500-105*Math.sin(Math.PI*v)-bounce};
+              const u = (((p.time / 0.8 + offset) % 1) + 1) % 1;
+              if (u < 0.6)
+                return {
+                  x: side * 45 + 100 - (u / 0.6) * 200,
+                  y: 500 - bounce,
+                };
+              const v = (u - 0.6) / 0.4;
+              return {
+                x: side * 45 - 100 + 200 * smooth(v),
+                y: 500 - 105 * Math.sin(Math.PI * v) - bounce,
+              };
             };
-            const leftC=foot(0,-1),rightC=foot(0.5,1);
-            const leftB=ik(leftA,leftC,who==="man"?285:305,who==="man"?295:340,-1);
-            const rightB=ik(rightA,rightC,who==="man"?285:305,who==="man"?295:340,-1);
+            const leftC = foot(0, -1),
+              rightC = foot(0.5, 1);
+            const leftB = ik(
+              leftA,
+              leftC,
+              who === "man" ? 285 : 305,
+              who === "man" ? 295 : 340,
+              -1,
+            );
+            const rightB = ik(
+              rightA,
+              rightC,
+              who === "man" ? 285 : 305,
+              who === "man" ? 295 : 340,
+              -1,
+            );
             if (who === "azi") {
-              if(p.barefoot){anchored("props/foot",rightC,{x:80,y:0},0.74);anchored("props/foot",leftC,{x:80,y:0},0.74);}
+              if (p.barefoot) {
+                anchored("props/foot", rightC, { x: 80, y: 0 }, 0.74);
+                anchored("props/foot", leftC, { x: 80, y: 0 }, 0.74);
+              }
 
               mesh(
                 "azi/leg-right-full",
@@ -464,7 +500,7 @@ export const SkinnedRig: React.FC<RigProps> = (props) => {
               LC = add(LB, 79, 205);
               RB = add(RA, 2 + pull, 215);
               RC = add(RB, 13 - pull, 200);
-            if (p.onlyArm) {
+              if (p.onlyArm) {
                 const release = smooth(((p.actionProgress ?? 0) - 0.3) / 0.36);
                 RB = add(RA, mix(2, 60, release), 215);
                 RC = add(RB, mix(13, -115, release), 200);
@@ -480,10 +516,22 @@ export const SkinnedRig: React.FC<RigProps> = (props) => {
               RB = add(RA, 38, 215);
               RC = add(RB, -130, 200);
             }
-              if(p.gesture==="ear") { RB=add(RA,-40,215); RC=add(RB,-128,200); }
-            if(p.gesture==="hair") { RB=add(RA,-48,215); RC=add(RB,-150,200); }
-            if(p.gesture==="kiss") { RB=add(RA,-35,215); RC=add(RB,-165+145*smooth((p.actionProgress??0)),200); }
-            if(p.shoes){ LB=add(LA,110,215); LC=add(LB,70+Math.sin(t*2)*3,205); }
+            if (p.gesture === "ear") {
+              RB = add(RA, -40, 215);
+              RC = add(RB, -128, 200);
+            }
+            if (p.gesture === "hair") {
+              RB = add(RA, -48, 215);
+              RC = add(RB, -150, 200);
+            }
+            if (p.gesture === "kiss") {
+              RB = add(RA, -35, 215);
+              RC = add(RB, -165 + 145 * smooth(p.actionProgress ?? 0), 200);
+            }
+            if (p.shoes) {
+              LB = add(LA, 110, 215);
+              LC = add(LB, 70 + Math.sin(t * 2) * 3, 205);
+            }
             if (p.onlyArm) {
               mesh(
                 "azi/arm-right-full",
@@ -547,8 +595,9 @@ export const SkinnedRig: React.FC<RigProps> = (props) => {
                 64,
                 mix(-12, -20, down),
               );
-            if(p.cup) anchored("props/cup",RC,{x:80,y:100},0.8);
-            if(p.shoes) anchored("props/shoes",LC,{x:110,y:0},0.55,0.12);
+            if (p.cup) anchored("props/cup", RC, { x: 80, y: 100 }, 0.8);
+            if (p.shoes)
+              anchored("props/shoes", LC, { x: 110, y: 0 }, 0.55, 0.12);
             mesh(
               "azi/arm-left-full",
               LA,
@@ -684,7 +733,7 @@ export const SkinnedRig: React.FC<RigProps> = (props) => {
               [380, 561],
             ]);
             mesh(
-              p.phone===false?"man/arm-open-full":"man/arm-grip-full",
+              p.phone === false ? "man/arm-open-full" : "man/arm-grip-full",
               RA,
               RB,
               RC,

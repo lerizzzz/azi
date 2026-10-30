@@ -7,10 +7,9 @@ b=(R.parent/'docs/PRODUCTION_REQUIREMENTS_v03.md').read_text()
 blocks=re.findall(r'СЦЕНА \d\..*?(?=СЦЕНА \d\.|8\. СЦЕНАРНАЯ)', b, re.S)
 scenes=[]
 for i,x in enumerate(blocks):
- text=x.split('Рассказчица:\n«')[1].split('».')[0] if False else x.split('Рассказчица:\n«')[1].split('».\n')[0]
- # Last quotation is followed by punctuation already inside in this brief.
- text=x.split('Рассказчица:\n«')[1].split('».')[0] if False else text
+ text=x.split('Рассказчица:\n«',1)[1].split('».\n',1)[0]
  scenes.append({'scene':i+1,'text':text})
+assert len(scenes)==8
 print([(s['scene'],len(s['text'].split()),s['text'][-65:]) for s in scenes])
 (R/'script.json').write_text(json.dumps(scenes,ensure_ascii=False,indent=2))
 V=R/'public/voice';V.mkdir(exist_ok=True)

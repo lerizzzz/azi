@@ -8,3 +8,4 @@ out/
 review/*.mp4
 review/decoded/
 **/__pycache__/
+review/recovery/

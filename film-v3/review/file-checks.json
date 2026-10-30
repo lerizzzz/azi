@@ -1,0 +1,16 @@
+{
+  "1080": {
+    "bytes": 36442799,
+    "sha256": "988f9449203dfb20a0e611c4c1f7f9cfad967bedbf4e8860f3da367df84b0fde",
+    "faststart": true,
+    "decoded_timestamp_count": 2892,
+    "constant_30fps": true
+  },
+  "phone": {
+    "bytes": 4562297,
+    "sha256": "b44d93c8b8254a93095e1499bd6a0c5d50640b77a1b22af37ac07f8f62e40509",
+    "faststart": true,
+    "decoded_timestamp_count": 2892,
+    "constant_30fps": true
+  }
+}
