@@ -6,11 +6,31 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { SkinnedRig as RigImpl } from "./SkinnedRig";
+import { SeamlessRig as RigImpl, Face, actorPose } from "./SeamlessRig";
+import {
+  ShotContext,
+  shotAt,
+  EyeStrip,
+  ComicTransition,
+  ComicInset,
+  useComicShot,
+} from "./ComicEdit";
 import timing from "./timing.json";
-const Rig = (p: React.ComponentProps<typeof RigImpl>) => (
-  <RigImpl key={p.who} {...p} />
-);
+const Rig = (p: React.ComponentProps<typeof RigImpl>) => {
+  const shot = useComicShot();
+  return (
+    <RigImpl
+      key={p.who}
+      {...p}
+      gaze={
+        p.who === "azi" &&
+        (p.mode === "notice" || shot.kind === "medium" || shot.kind === "eyes")
+          ? "viewer"
+          : "street"
+      }
+    />
+  );
+};
 type P = {
   children?: React.ReactNode;
   x?: number;
@@ -28,10 +48,13 @@ type P = {
   dark?: boolean;
   work?: boolean;
   open?: number;
+  viewer?: boolean;
+  onlyArm?: boolean;
+  task?: "treat" | "push";
+  tool?: "cotton" | "tweezers";
 };
 const C = "#f3e9dc",
-  ink = "#100f18",
-  red = "#a92d46";
+  ink = "#100f18";
 const clamp = (v: number) => Math.max(0, Math.min(1, v));
 const ease = (v: number) => {
   v = clamp(v);
@@ -40,6 +63,20 @@ const ease = (v: number) => {
 const image = (f: string, style: React.CSSProperties = {}) => (
   <Img src={staticFile(f)} style={{ position: "absolute", ...style }} />
 );
+function useHud(x: number, y: number) {
+  const shot = useComicShot(),
+    f = useCurrentFrame(),
+    { fps } = useVideoConfig();
+  const z =
+    shot.zoom +
+    (shot.kind === "medium" ? 0.015 * Math.min(f / fps - shot.from, 2) : 0);
+  return {
+    left: shot.focus[0] + (x - shot.focus[0]) / z,
+    top: shot.focus[1] + (y - shot.focus[1]) / z,
+    transform: `scale(${1 / z})`,
+    transformOrigin: "0 0",
+  };
+}
 const Text = ({
   children,
   x = 70,
@@ -47,74 +84,80 @@ const Text = ({
   size = 62,
   color = C,
   w = 900,
-}: P) => (
-  <div
-    style={{
-      position: "absolute",
-      left: x,
-      top: y,
-      width: w,
-      fontSize: size,
-      lineHeight: 1.06,
-      color,
-      fontFamily: "Neucha",
-      textShadow: "2px 3px 0 #100f18",
-    }}
-  >
-    {children}
-  </div>
-);
-const Tag = ({ children, x = 60, y = 140, w = 880, size = 54 }: P) => (
-  <div
-    style={{
-      position: "absolute",
-      left: x,
-      top: y,
-      width: w,
-      boxSizing: "border-box",
-      padding: "22px 30px",
-      background: C,
-      border: "5px solid #11101a",
-      boxShadow: "9px 10px 0 #11101a",
-      color: ink,
-      fontSize: size,
-      lineHeight: 1.1,
-      fontFamily: "Neucha",
-      transform: "rotate(-1.4deg)",
-    }}
-  >
-    {children}
-  </div>
-);
-const Bubble = ({ children, x = 80, y = 350, w = 650, size = 55 }: P) => (
-  <div
-    style={{
-      position: "absolute",
-      left: x,
-      top: y,
-      width: w,
-      boxSizing: "border-box",
-      padding: "28px 36px",
-      borderRadius: "46% 38% 40% 32% / 25% 36% 29% 30%",
-      background: C,
-      border: "6px solid #11101a",
-      color: ink,
-      fontSize: size,
-      lineHeight: 1.04,
-      fontFamily: "Neucha",
-      boxShadow: "8px 10px 0 #11101a",
-    }}
-  >
-    {children}
-    <svg
-      width="70"
-      height="72"
-      style={{ position: "absolute", bottom: -60, right: 60 }}
+}: P) => {
+  const hud = useHud(x, y);
+  return (
+    <div
+      style={{
+        position: "absolute",
+        ...hud,
+        width: w,
+        fontSize: size,
+        lineHeight: 1.06,
+        color,
+        fontFamily: "Neucha",
+        textShadow: "2px 3px 0 #100f18",
+      }}
     >
-      <path d="M4 0 L58 64 L48 0" fill={C} stroke={ink} strokeWidth="6" />
-    </svg>
-  </div>
-);
+      {children}
+    </div>
+  );
+};
+const Tag = ({ children, x = 60, y = 140, w = 880, size = 54 }: P) => {
+  const hud = useHud(x, y);
+  return (
+    <div
+      style={{
+        position: "absolute",
+        ...hud,
+        width: w,
+        boxSizing: "border-box",
+        padding: "22px 30px",
+        background: C,
+        border: "5px solid #11101a",
+        boxShadow: "9px 10px 0 #11101a",
+        color: ink,
+        fontSize: size,
+        lineHeight: 1.1,
+        fontFamily: "Neucha",
+        transform: `${hud.transform} rotate(-1.4deg)`,
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+const Bubble = ({ children, x = 80, y = 350, w = 650, size = 55 }: P) => {
+  const hud = useHud(x, y);
+  return (
+    <div
+      style={{
+        position: "absolute",
+        ...hud,
+        width: w,
+        boxSizing: "border-box",
+        padding: "28px 36px",
+        borderRadius: "46% 38% 40% 32% / 25% 36% 29% 30%",
+        background: C,
+        border: "6px solid #11101a",
+        color: ink,
+        fontSize: size,
+        lineHeight: 1.04,
+        fontFamily: "Neucha",
+        boxShadow: "8px 10px 0 #11101a",
+      }}
+    >
+      {children}
+      <svg
+        width="70"
+        height="72"
+        style={{ position: "absolute", bottom: -60, right: 60 }}
+      >
+        <path d="M4 0 L58 64 L48 0" fill={C} stroke={ink} strokeWidth="6" />
+      </svg>
+    </div>
+  );
+};
 const Svg = ({ children }: P) => (
   <svg
     viewBox="0 0 1080 1920"
@@ -174,6 +217,7 @@ const Head = ({
   s = 1.2,
   face = "neutral",
   smudge = false,
+  viewer = false,
 }: P) => (
   <div
     style={{
@@ -181,37 +225,27 @@ const Head = ({
       left: x,
       top: y,
       width: 600 * s,
-      height: 720 * s,
+      height: 640 * s,
       transform: `rotate(${Math.sin(t * 1.4) * 1.2}deg)`,
     }}
   >
-    {image(`azi/head-${face}.png`, { width: 600 * s, top: 0, left: 0 })}
-    {smudge && (
-      <svg
-        viewBox="0 0 600 720"
-        style={{
-          position: "absolute",
-          left: 0,
-          top: 0,
-          width: 600 * s,
-          height: 720 * s,
-        }}
-      >
-        <path
-          d="M245 277 Q205 355 224 391 M398 265 Q430 353 411 378"
-          stroke="#18121d"
-          strokeWidth="37"
-          opacity=".85"
-          fill="none"
-        />
-        <path
-          d="M240 285 L233 410 M403 278 L412 405"
-          stroke="#18121d"
-          strokeWidth="9"
-          opacity=".8"
-        />
-      </svg>
-    )}
+    <svg viewBox="0 0 554 588" width={600 * s} height={(600 * s * 588) / 554}>
+      <Face
+        who="azi"
+        time={t}
+        state={face}
+        viewer={viewer}
+        x={0}
+        y={0}
+        width={554}
+      />
+      {smudge && (
+        <g fill="#17111c" opacity=".86">
+          <path d="M173 316 Q190 311 213 310 Q215 333 205 349 C191 365 199 382 189 398 C176 385 185 369 174 359 Q165 345 173 316Z" />
+          <path d="M329 278 Q348 271 368 266 Q371 293 364 318 C353 340 361 360 352 378 C338 363 345 345 337 332 Q328 312 329 278Z" />
+        </g>
+      )}
+    </svg>
   </div>
 );
 const Phone = ({ x = 700, y = 1000, s = 1, r = 0 }: P) =>
@@ -231,147 +265,94 @@ const Bed = ({ x = 130, y = 1240, s = 1, r = 0 }: P) => (
       transformOrigin: "0 0",
     }}
   >
-    <svg width="900" height="500">
-      <path
-        d="M90 245 L65 438 M720 245 L760 438"
-        stroke="#201e28"
-        strokeWidth="25"
+    <svg width="960" height="560" viewBox="-30 -100 990 660">
+      <ellipse
+        cx="480"
+        cy="438"
+        rx="450"
+        ry="54"
+        fill="#100e19"
+        opacity=".22"
       />
       <path
-        d="M0 160 L700 70 L860 200 L170 320Z"
-        fill="#211e29"
-        stroke="#08080f"
-        strokeWidth="12"
-      />
-      <path
-        d="M20 157 L170 260 L840 170"
-        fill="none"
-        stroke="#514653"
+        d="M95 92 L67 376 L101 383 L133 118 M785 300 L792 481 L827 481 L827 287 M858 210 L890 389"
+        fill="#201b28"
+        stroke="#0c0b12"
         strokeWidth="9"
       />
       <path
-        d="M35 135 L150 60 L310 106 L195 218Z"
-        fill="#322b38"
-        stroke="#100f18"
-        strokeWidth="8"
+        d="M45 -34 L921 205 L858 354 L-5 108Z"
+        fill="#18141f"
+        stroke="#100d16"
+        strokeWidth="10"
+      />
+      <path
+        d="M50 -62 L930 177 Q951 189 932 220 L866 321 Q858 337 833 328 L-8 88 Q-26 80 -13 52 L28 -47Q34 -65 50 -62Z"
+        fill="#29222f"
+        stroke="#100d17"
+        strokeWidth="9"
+      />
+      <path d="M52 -37 L896 193 L842 300 L17 67Z" fill="#342c3a" />
+      <path
+        d="M75 -12 L224 28 L193 105 L35 64Z"
+        fill="#443747"
+        stroke="#110e18"
+        strokeWidth="6"
+      />
+      <path
+        d="M245 40 L852 205 M25 88 L851 321"
+        stroke="#6b5767"
+        strokeWidth="3"
+        opacity=".6"
       />
     </svg>
   </div>
 );
 const Studio = ({ dark = false }: P) => (
   <>
+    {image(dark ? "v04/studio-dark.png" : "v04/studio-light.png", {
+      inset: 0,
+      width: 1080,
+      height: 1920,
+      objectFit: "cover",
+    })}
     <Svg>
-      <rect width="1080" height="1920" fill={dark ? "#29242d" : "#e8ded4"} />
-      <path d="M0 0 H1080 V1350 L0 1500Z" fill={dark ? "#35303a" : "#e8e1dc"} />
       <path
-        d="M0 1500 L1080 1350 V1920 H0Z"
-        fill={dark ? "#574039" : "#ac7862"}
-      />
-      {[0, 1, 2, 3, 4].map((i) => (
-        <path
-          key={i}
-          d={`M${i * 270 - 250} 1920 L${200 + i * 160} 1400`}
-          stroke="#2b222b"
-          strokeWidth="5"
-          opacity=".4"
-        />
-      ))}
-      <path
-        d="M125 440 H680 V1170 H125Z"
-        fill="#16161f"
-        stroke="#12111a"
-        strokeWidth="12"
-      />
-      {[1, 2, 3, 4].map((i) => (
-        <path
-          key={i}
-          d={`M${125 + i * 100} 450 V1160`}
-          stroke="#292732"
-          strokeWidth="9"
-        />
-      ))}
-      <path
-        d="M790 405 Q700 1150 845 1430 L1060 1380 V380Z"
-        fill={dark ? "#5f555d" : "#eee9df"}
-        stroke="#a49a99"
-        strokeWidth="5"
-      />
-      <path
-        d="M760 1380 Q680 780 1020 780"
+        d="M865 1660 Q745 1460 790 1190 Q812 1090 962 1080"
+        stroke="#100e17"
+        strokeWidth="13"
         fill="none"
-        stroke="#16131b"
+      />
+      <path
+        d="M852 1093 Q900 1050 973 1080"
+        stroke={dark ? "#48404b" : "#f2eee3"}
         strokeWidth="17"
-      />
-      <path
-        d="M840 785 Q940 730 1035 790"
         fill="none"
-        stroke={dark ? "#d69562" : "#ffffed"}
-        strokeWidth="22"
-      />
-      <path
-        d="M822 365 C750 280 680 370 823 467 C967 369 892 280 822 365Z"
-        fill="none"
-        stroke="#e45468"
-        strokeWidth="10"
-        opacity={dark ? 0.35 : 0.9}
       />
     </Svg>
-    {dark && (
-      <AbsoluteFill
-        style={{
-          background:
-            "radial-gradient(ellipse at 88% 48%,rgba(231,138,66,.22),transparent 48%)",
-        }}
-      />
-    )}
   </>
 );
-const Master = ({ t = 0, x = 720, y = 930, s = 0.9, work = false }: P) => (
-  <div
-    style={{
-      position: "absolute",
-      left: x,
-      top: y,
-      transform: `scale(${s})`,
-      transformOrigin: "0 0",
-    }}
-  >
-    <svg width="320" height="950" style={{ position: "absolute" }}>
-      <path
-        d="M55 430 L260 430 L272 800 L185 805 L155 570 L125 805 L35 805Z"
-        fill="#24212b"
-        stroke="#0d0c14"
-        strokeWidth="10"
-      />
-      <path
-        d="M33 800 L128 800 L124 830 L10 830Z M182 800 L272 800 L303 830 L185 830Z"
-        fill="#121019"
-        stroke="#080810"
-        strokeWidth="7"
-      />
-    </svg>
-    {image("master/torso.png", { left: 0, top: 180, width: 290 })}
-    {image("master/head-neutral.png", {
-      left: 30,
-      top: 0,
-      width: 220,
-      transform: `rotate(${Math.sin(t * 2) * 3}deg)`,
-    })}
-    {image("master/arm-left-full.png", {
-      left: 15,
-      top: 220,
-      width: 130,
-      transformOrigin: "30px 35px",
-      transform: `rotate(${work ? 65 + Math.sin(t * 3) * 5 : 8}deg)`,
-    })}
-    {image("master/arm-right-full.png", {
-      left: 205,
-      top: 220,
-      width: 100,
-      transformOrigin: "25px 35px",
-      transform: `rotate(${work ? 55 + Math.sin(t * 3) * 4 : -5}deg)`,
-    })}
-  </div>
+const Master = ({
+  t = 0,
+  x = 720,
+  y = 930,
+  s = 0.9,
+  work = false,
+  task,
+  onlyArm = false,
+  tool,
+}: P) => (
+  <RigImpl
+    who="master"
+    time={work ? t : 0}
+    x={x + 120 * s}
+    y={y + 500 * s}
+    scale={s}
+    phone={false}
+    task={work ? (task ?? "push") : undefined}
+    onlyArm={onlyArm}
+    tool={tool}
+  />
 );
 const Door = ({ open = 0 }: P) => (
   <Svg>
@@ -404,6 +385,17 @@ const Door = ({ open = 0 }: P) => (
     />
   </Svg>
 );
+function releasedPhone(dt: number) {
+  const k = 2.2;
+  const bodyLift = ease((k - 1) / 2.4);
+  const armLift = ease((k - 1.4) / 2.2);
+  const wrist = actorPose({ who: "man", time: k, lift: armLift, phone: true })
+    .wrists.left;
+  return {
+    x: 540 + wrist.x * 0.82 - 25 + 35 * dt,
+    y: 1330 - bodyLift * 950 + wrist.y * 0.82 - 42 + 450 * dt * dt,
+  };
+}
 function Scene({
   n,
   t,
@@ -558,8 +550,8 @@ function Scene({
             <UFO x={550} y={340} t={t} s={0.92} />
             {a(2) >= 2.2 && a(2) < 4 && (
               <Phone
-                x={870 + 35 * (a(2) - 2.2)}
-                y={400 + 450 * (a(2) - 2.2) ** 2}
+                x={releasedPhone(a(2) - 2.2).x}
+                y={releasedPhone(a(2) - 2.2).y}
                 s={0.7}
                 r={(a(2) - 2.2) * 65}
               />
@@ -605,7 +597,7 @@ function Scene({
     );
   }
   if (n === 3) {
-    const walkT = Math.max(0, t - q(2));
+    const walkT = Math.max(0, t - (q(5) - 0.5));
     return (
       <>
         <Street court t={t} />
@@ -641,8 +633,8 @@ function Scene({
                   who="man"
                   time={t + i}
                   x={i === 0 ? 130 : i === 1 ? 920 : 320}
-                  y={i === 2 ? 1510 : 1340}
-                  scale={i === 2 ? 0.48 : 0.62}
+                  y={i === 2 ? 1430 : 1340}
+                  scale={i === 2 ? 0.66 : 0.62}
                   phone={false}
                   filming={0}
                   selfie={0}
@@ -671,12 +663,12 @@ function Scene({
                 </text>
               </g>
             </Svg>
-            {t > q(2) && (
+            {t > q(5) - 0.5 && (
               <Rig
                 who="azi"
                 time={walkT}
                 x={-160 + walkT * 416.666 * 0.7}
-                y={1530}
+                y={1440}
                 scale={0.7}
                 phone={false}
                 shoes
@@ -707,12 +699,12 @@ function Scene({
             who="azi"
             time={dt}
             x={move ? 320 + dt * 416.666 * 0.8 : 380}
-            y={1400}
+            y={1360}
             scale={0.8}
             phone={false}
             shoes
             barefoot
-            gesture={move ? undefined : "ear"}
+            gesture={move || t < 2.6 ? undefined : "ear"}
             walking={move}
             action={move ? "run" : "idle"}
           />
@@ -787,7 +779,7 @@ function Scene({
             who="azi"
             time={t}
             x={enter ? 540 + ease((t - q(3) - 3) / 1.1) * 500 : 500}
-            y={1420}
+            y={1320}
             scale={0.85}
             phone={false}
             shoes
@@ -855,39 +847,31 @@ function Scene({
         ) : (
           <>
             <Studio t={t} />
+            <Master t={t} x={220} y={1090} s={0.62} work task="treat" />
             <Bed y={1280} x={40} s={1} />
             <Rig
               who="azi"
               time={t}
               x={530}
-              y={1400}
+              y={1435}
               scale={0.57}
               rotation={-72}
               phone={false}
               barefoot
               face={t > q(3) + 0.8 ? "blink" : "neutral"}
             />
-            <Master t={t} x={700} y={800} s={0.72} work />
-            {t >= q(3) &&
-              image("props/tweezers.png", {
-                left: 230 + Math.sin(t * 3) * 13,
-                top: 1190,
-                width: 140,
-                transform: "rotate(-34deg)",
-              })}
-            <Svg>
-              {t >= q(3) && a(3) < 1 && (
-                <ellipse
-                  cx={180 + 40 * Math.sin(a(3) * 6)}
-                  cy="1260"
-                  rx="34"
-                  ry="23"
-                  fill="#f3eade"
-                  stroke="#18121d"
-                  strokeWidth="4"
-                />
-              )}
-            </Svg>
+            <Master
+              t={t}
+              x={220}
+              y={1090}
+              s={0.62}
+              work
+              task="treat"
+              onlyArm
+              tool={
+                t >= q(3) ? (a(3) < 0.8 ? "cotton" : "tweezers") : undefined
+              }
+            />
             <Tag y={130}>
               {t < q(1)
                 ? "СРАЗУ — НА КУШЕТОЧКУ."
@@ -908,7 +892,7 @@ function Scene({
             who="azi"
             time={t}
             x={380 + 150 * ease((a(2) - 3) / 1.2)}
-            y={1400}
+            y={1320 + 115 * ease((a(2) - 3) / 1.2)}
             scale={0.87 - 0.3 * ease((a(2) - 3) / 1.2)}
             rotation={-72 * ease((a(2) - 3) / 1.2)}
             cup={a(2) > 1 && a(2) < 3}
@@ -930,25 +914,28 @@ function Scene({
               stroke={ink}
               strokeWidth="20"
             />
-            <path
-              d="M690 1530 L700 1410 H820 L815 1530Z"
-              fill="#ebe5d7"
-              stroke={ink}
-              strokeWidth="8"
-            />
-            <path
-              d="M820 1430 Q890 1430 870 1500 L820 1500"
-              fill="none"
-              stroke={ink}
-              strokeWidth="12"
-            />
-            <path
-              d="M730 1400 Q700 1360 735 1320 M775 1390 Q750 1350 785 1310"
-              fill="none"
-              stroke="#f4e7d2"
-              strokeWidth="7"
-              opacity={0.5 + 0.25 * Math.sin(t * 3)}
-            />
+            <g opacity={a(2) > 1 && a(2) < 3 ? 0 : 1}>
+              {" "}
+              <path
+                d="M690 1530 L700 1410 H820 L815 1530Z"
+                fill="#ebe5d7"
+                stroke={ink}
+                strokeWidth="8"
+              />
+              <path
+                d="M820 1430 Q890 1430 870 1500 L820 1500"
+                fill="none"
+                stroke={ink}
+                strokeWidth="12"
+              />
+              <path
+                d="M730 1400 Q700 1360 735 1320 M775 1390 Q750 1350 785 1310"
+                fill="none"
+                stroke="#f4e7d2"
+                strokeWidth="7"
+                opacity={0.5 + 0.25 * Math.sin(t * 3)}
+              />
+            </g>{" "}
             <path
               d="M410 1620 Q480 1720 610 1620"
               fill="none"
@@ -986,6 +973,7 @@ function Scene({
           <Head
             t={t}
             x={330}
+            viewer
             y={620}
             s={1.1}
             face={t % 4 > 3.8 ? "blink" : "neutral"}
@@ -1018,7 +1006,10 @@ export function Film() {
     .filter((c) => c.scene === s.scene)
     .map((c) => ({ ...c, start: c.start - s.start, end: c.end - s.start }));
   const lt = t - s.start;
-  const transition = 1 - ease(lt / 0.22);
+  const shot = shotAt(t);
+  const age = t - shot.from;
+  const cameraScale =
+    shot.zoom + (shot.kind === "medium" ? 0.015 * Math.min(age, 2) : 0);
   return (
     <AbsoluteFill
       style={{
@@ -1029,7 +1020,20 @@ export function Film() {
       }}
     >
       <style>{`@font-face{font-family:Neucha;src:url('${staticFile("fonts/Neucha.ttf")}')}`}</style>
-      <Scene n={s.scene} t={lt} d={s.end - s.start} cues={q} />
+      <ShotContext.Provider value={shot}>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            transformOrigin: `${shot.focus[0]}px ${shot.focus[1]}px`,
+            transform: `scale(${cameraScale})`,
+          }}
+        >
+          <Scene n={s.scene} t={lt} d={s.end - s.start} cues={q} />
+        </div>
+        <EyeStrip shot={shot} time={t} />
+        <ComicInset shot={shot} time={t} />
+      </ShotContext.Provider>
       <AbsoluteFill
         style={{
           pointerEvents: "none",
@@ -1038,15 +1042,7 @@ export function Film() {
           boxShadow: "inset 0 0 0 15px #100f18",
         }}
       />
-      {transition > 0 && idx > 0 && (
-        <AbsoluteFill
-          style={{
-            background: C,
-            transform: `translateX(${-1080 * (1 - transition)}px) skewX(-12deg)`,
-            borderRight: `28px solid ${red}`,
-          }}
-        />
-      )}
+      <ComicTransition time={t} shot={shot} />
     </AbsoluteFill>
   );
 }

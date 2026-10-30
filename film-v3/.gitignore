@@ -9,3 +9,6 @@ review/*.mp4
 review/decoded/
 **/__pycache__/
 review/recovery/
+review/**/*.png
+review/**/*.mp4
+review/v04/validate/

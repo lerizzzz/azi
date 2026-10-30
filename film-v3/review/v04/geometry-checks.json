@@ -1,0 +1,9 @@
+{
+  "poseSamples": 7200,
+  "maximumSegmentLengthError": 2.2737367544323206e-13,
+  "maximumStanceDrift": 2.5421149729252077e-13,
+  "shots": 40,
+  "minShotSeconds": 2,
+  "maxShotSeconds": 2.960000000000022,
+  "scope": "Numerical skeleton and edit-plan tests. Visual anatomical review is separate."
+}

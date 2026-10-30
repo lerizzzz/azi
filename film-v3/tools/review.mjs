@@ -16,7 +16,7 @@ try {
     puppeteerInstance: browser,
     composition: await selectComposition({
       serveUrl: url,
-      id: "AziFilm",
+      id: process.env.AZI_REVIEW_COMPOSITION ?? "AziFilm",
       puppeteerInstance: browser,
     }),
     imageFormat: "png",
@@ -30,7 +30,7 @@ try {
       .map((t) => Math.floor(t * 30));
   }
   for (const frame of frames) {
-    await renderStill({ ...opts, frame, output: `review/frame-${frame}.png` });
+    await renderStill({ ...opts, frame, output: `review/v04/frame-${frame}.png` });
     console.log(frame);
   }
 } finally {
