@@ -1,0 +1,18 @@
+{
+  "azi-lashes-v04-1080.mp4": {
+    "faststart": true,
+    "constant_30fps": true,
+    "timestamps_checked": 2892,
+    "bytes": 42525958,
+    "sha256": "8ac0feee96daa540e38852ac26dc844e2570ae5e2c71d9ab24a732b8bd94bcdd"
+  },
+  "azi-lashes-v04-phone.mp4": {
+    "faststart": true,
+    "constant_30fps": true,
+    "timestamps_checked": 2892,
+    "bytes": 5844872,
+    "sha256": "24ad43e01e83d1f321f718e70ff6668e552223046e74a40f0810b000a0503eeb"
+  },
+  "decoded_review_frames": 332,
+  "black_intervals_over_120ms": []
+}

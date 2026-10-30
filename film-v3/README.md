@@ -1,3 +1,21 @@
+# AZI LASHES • V04
+
+Текущая композиция использует цельную векторную анатомию SeamlessRig и монтаж ComicEdit на 40 планов. Папка film-v3 — историческое имя проекта; актуальная версия — V04. Предыдущие публичные MP4 сохранены отдельно.
+
+## Экспорт V04
+
+```sh
+npm ci
+npm run lint
+npx remotion render src/index.ts AziFilm review/v04/picture.mp4 --browser-executable=/usr/bin/chromium --concurrency=2 --codec=h264 --crf=18
+python3 tools/export-v04.py
+node tools/validate-v04.mjs
+```
+
+Итоговые файлы: out/v04/azi-lashes-v04-1080.mp4 и out/v04/azi-lashes-v04-phone.mp4. Исходная озвучка уже включена в public/mix.wav; повторный TTS не требуется. Воспроизводимость, визуальные контрольные случаи и ограничения — review/v04/QA.md и review/v04/REPORT.md.
+
+---
+
 # AZI LASHES • film v03
 
 New eight-scene vertical comic film. Recovered artwork is reused; rejected previous films are not spliced. The current brief is ../docs/PRODUCTION_REQUIREMENTS_v03.md. Storyboards and alternatives are in STORYBOARD.md. Narration text and real cue durations are in script.json / timing.json. Temporary female synthetic Russian voice: RHVoice Elena. No paid APIs.

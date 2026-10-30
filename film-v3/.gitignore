@@ -12,3 +12,6 @@ review/recovery/
 review/**/*.png
 review/**/*.mp4
 review/v04/validate/
+review/**/*.log
+review/v04/decoded/
+review/v04/walk-sequence/

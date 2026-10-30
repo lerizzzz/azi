@@ -5,3 +5,7 @@
 - Neucha: Jovanny Lemonad, SIL Open Font License, public/fonts/OFL.txt. Embedded locally with Cyrillic.
 - Speech: RHVoice, https://github.com/RHVoice/RHVoice ; Russian language and Elena voice from official pinned submodules. Free local synthesis. See licenses/RHVoice-LICENSE.md and licenses/Elena-README.md (GPL v3). This is temporary synthetic narration, not professional acting. Original text is user-supplied.
 - Remotion 4.0.539 and React: package-lock.json contains exact installed dependencies. No paid voice API, subscription, stock music, remote font, or external credit service used.
+
+## V04 revision
+
+`src/SeamlessRig.tsx` replaces the independent texture limbs with continuous, shared-joint vector anatomy and a single connected trousers silhouette. Original texture body parts are retained for history but not used by V04. Original PNG face layers remain part of the visual identity. The frontal neutral, surprised and smiling heads and the studio light/dark backgrounds in `public/v04/` were produced with native image_gen from the canonical art and the user's textual brief. The real studio photographs and external comic video reference were not available in this machine, so the room is a stylized reconstruction. `src/ComicEdit.tsx` authors 40 shots. Voice and music retain the measured 96.4-second source mix.

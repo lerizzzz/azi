@@ -1,0 +1,30 @@
+{
+  "source": "Native image_gen using original Azi canonical art and the written studio brief; no exact photo reconstruction claimed.",
+  "files": [
+    {
+      "file": "public/v04/azi-front-smile.png",
+      "bytes": 1346384,
+      "sha256": "60737396cc50999d9601bc62675b23f97fa145f94f17d7cfcf45c9ddc05508db"
+    },
+    {
+      "file": "public/v04/azi-front-surprise.png",
+      "bytes": 1379061,
+      "sha256": "4242c13c4fba9615f2159c6072c48fc689e438b4cbfc42b39888c5f46f4851de"
+    },
+    {
+      "file": "public/v04/azi-front.png",
+      "bytes": 1327194,
+      "sha256": "fdf9db2916cf24e2fcf60b43f68a6d2b4d30237db9e5b0f5ae56da812cfa665d"
+    },
+    {
+      "file": "public/v04/studio-dark.png",
+      "bytes": 1893419,
+      "sha256": "6b45cf6ae929380792bc993d78cb1ac4d7131ffb9ea859b16c021a2652ca8575"
+    },
+    {
+      "file": "public/v04/studio-light.png",
+      "bytes": 2136366,
+      "sha256": "2d90f088bcdb7878bdc99cc6850d51d7fb66463700f88cf4b562e94026b6491b"
+    }
+  ]
+}
