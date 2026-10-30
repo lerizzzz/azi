@@ -1,0 +1,738 @@
+[
+  {
+    "scene": 1,
+    "from": 0,
+    "to": 1.62,
+    "kind": "wide",
+    "focus": [
+      540,
+      980
+    ],
+    "zoom": 1,
+    "acting": "phone",
+    "action": "read-phone",
+    "eyeWho": "azi",
+    "note": "read-phone",
+    "entry": "cut"
+  },
+  {
+    "scene": 1,
+    "from": 1.62,
+    "to": 3.7,
+    "kind": "medium",
+    "focus": [
+      480,
+      1010
+    ],
+    "zoom": 1.105,
+    "acting": "startled",
+    "action": "ufo-reaction",
+    "eyeWho": "azi",
+    "note": "ufo-reaction",
+    "entry": "impact"
+  },
+  {
+    "scene": 1,
+    "from": 3.7,
+    "to": 5.4,
+    "kind": "detail",
+    "focus": [
+      510,
+      1000
+    ],
+    "zoom": 1.28,
+    "acting": "deadpan",
+    "action": "lower-phone",
+    "eyeWho": "azi",
+    "note": "lower-phone",
+    "entry": "cut"
+  },
+  {
+    "scene": 1,
+    "from": 5.4,
+    "to": 7.04,
+    "kind": "eyes",
+    "focus": [
+      540,
+      1020
+    ],
+    "zoom": 1,
+    "acting": "deadpan",
+    "action": "date-reaction",
+    "eyeWho": "azi",
+    "note": "date-reaction",
+    "entry": "impact"
+  },
+  {
+    "scene": 2,
+    "from": 7.04,
+    "to": 8.64,
+    "kind": "wide",
+    "focus": [
+      540,
+      960
+    ],
+    "zoom": 1,
+    "acting": "",
+    "action": "map-route",
+    "eyeWho": "azi",
+    "note": "map-route",
+    "entry": "cut"
+  },
+  {
+    "scene": 2,
+    "from": 8.64,
+    "to": 10.24,
+    "kind": "detail",
+    "focus": [
+      620,
+      900
+    ],
+    "zoom": 1.28,
+    "acting": "",
+    "action": "ship-hover",
+    "eyeWho": "azi",
+    "note": "ship-hover",
+    "entry": "cut"
+  },
+  {
+    "scene": 2,
+    "from": 10.24,
+    "to": 12.24,
+    "kind": "medium",
+    "focus": [
+      540,
+      1010
+    ],
+    "zoom": 1.105,
+    "acting": "",
+    "action": "lift-body",
+    "eyeWho": "azi",
+    "note": "lift-body",
+    "entry": "cut"
+  },
+  {
+    "scene": 2,
+    "from": 12.24,
+    "to": 14.34,
+    "kind": "detail",
+    "focus": [
+      600,
+      1000
+    ],
+    "zoom": 1.28,
+    "acting": "",
+    "action": "drop-phone",
+    "eyeWho": "azi",
+    "note": "drop-phone",
+    "entry": "cut"
+  },
+  {
+    "scene": 2,
+    "from": 14.34,
+    "to": 16.74,
+    "kind": "wide",
+    "focus": [
+      540,
+      950
+    ],
+    "zoom": 1,
+    "acting": "",
+    "action": "empty-space",
+    "eyeWho": "azi",
+    "note": "empty-space",
+    "entry": "cut"
+  },
+  {
+    "scene": 2,
+    "from": 16.74,
+    "to": 18.84,
+    "kind": "split",
+    "focus": [
+      540,
+      1050
+    ],
+    "zoom": 1,
+    "acting": "",
+    "action": "chat-message",
+    "eyeWho": "azi",
+    "note": "chat-message",
+    "entry": "cut"
+  },
+  {
+    "scene": 2,
+    "from": 18.84,
+    "to": 21.1,
+    "kind": "detail",
+    "focus": [
+      570,
+      1090
+    ],
+    "zoom": 1.28,
+    "acting": "",
+    "action": "no-signal",
+    "eyeWho": "azi",
+    "note": "no-signal",
+    "entry": "cut"
+  },
+  {
+    "scene": 3,
+    "from": 21.1,
+    "to": 22.96,
+    "kind": "detail",
+    "focus": [
+      530,
+      1400
+    ],
+    "zoom": 1.28,
+    "acting": "",
+    "action": "remove-heels",
+    "eyeWho": "azi",
+    "note": "remove-heels",
+    "entry": "cut"
+  },
+  {
+    "scene": 3,
+    "from": 22.96,
+    "to": 24.4,
+    "kind": "medium",
+    "focus": [
+      500,
+      1220
+    ],
+    "zoom": 1.105,
+    "acting": "idea",
+    "action": "hold-heels",
+    "eyeWho": "azi",
+    "note": "hold-heels",
+    "entry": "cut"
+  },
+  {
+    "scene": 3,
+    "from": 24.4,
+    "to": 26.35,
+    "kind": "medium",
+    "focus": [
+      500,
+      1050
+    ],
+    "zoom": 1.105,
+    "acting": "idea",
+    "action": "alien-near",
+    "eyeWho": "azi",
+    "note": "alien-near",
+    "entry": "impact"
+  },
+  {
+    "scene": 3,
+    "from": 26.35,
+    "to": 28.3,
+    "kind": "wide",
+    "focus": [
+      540,
+      1120
+    ],
+    "zoom": 1,
+    "acting": "",
+    "action": "guides-talk",
+    "eyeWho": "azi",
+    "note": "guides-talk",
+    "entry": "cut"
+  },
+  {
+    "scene": 3,
+    "from": 28.3,
+    "to": 30.35,
+    "kind": "detail",
+    "focus": [
+      520,
+      1180
+    ],
+    "zoom": 1.28,
+    "acting": "",
+    "action": "river-boat",
+    "eyeWho": "azi",
+    "note": "river-boat",
+    "entry": "cut"
+  },
+  {
+    "scene": 3,
+    "from": 30.35,
+    "to": 32.4,
+    "kind": "split",
+    "focus": [
+      570,
+      1050
+    ],
+    "zoom": 1,
+    "acting": "",
+    "action": "human-alien",
+    "eyeWho": "azi",
+    "note": "human-alien",
+    "entry": "cut"
+  },
+  {
+    "scene": 3,
+    "from": 32.4,
+    "to": 34.54,
+    "kind": "wide",
+    "focus": [
+      600,
+      1210
+    ],
+    "zoom": 1,
+    "acting": "",
+    "action": "escape-walk",
+    "eyeWho": "azi",
+    "note": "escape-walk",
+    "entry": "cut"
+  },
+  {
+    "scene": 4,
+    "from": 34.54,
+    "to": 36.46,
+    "kind": "medium",
+    "focus": [
+      610,
+      1100
+    ],
+    "zoom": 1.105,
+    "acting": "idea",
+    "action": "alien-question",
+    "eyeWho": "alien",
+    "note": "alien-question",
+    "entry": "cut"
+  },
+  {
+    "scene": 4,
+    "from": 36.46,
+    "to": 38.44,
+    "kind": "detail",
+    "focus": [
+      480,
+      960
+    ],
+    "zoom": 1.28,
+    "acting": "idea",
+    "action": "insert-earbud",
+    "eyeWho": "alien",
+    "note": "insert-earbud",
+    "entry": "cut"
+  },
+  {
+    "scene": 4,
+    "from": 38.44,
+    "to": 40.44,
+    "kind": "medium",
+    "focus": [
+      450,
+      1060
+    ],
+    "zoom": 1.105,
+    "acting": "talk",
+    "action": "say-call",
+    "eyeWho": "alien",
+    "note": "say-call",
+    "entry": "cut"
+  },
+  {
+    "scene": 4,
+    "from": 40.44,
+    "to": 42.49,
+    "kind": "eyes",
+    "focus": [
+      810,
+      930
+    ],
+    "zoom": 1,
+    "acting": "",
+    "action": "interrupted",
+    "eyeWho": "alien",
+    "note": "interrupted",
+    "entry": "impact"
+  },
+  {
+    "scene": 4,
+    "from": 42.49,
+    "to": 44.54,
+    "kind": "wide",
+    "focus": [
+      620,
+      1100
+    ],
+    "zoom": 1,
+    "acting": "",
+    "action": "wait-clock",
+    "eyeWho": "alien",
+    "note": "wait-clock",
+    "entry": "cut"
+  },
+  {
+    "scene": 4,
+    "from": 44.54,
+    "to": 46.46,
+    "kind": "wide",
+    "focus": [
+      690,
+      1210
+    ],
+    "zoom": 1,
+    "acting": "",
+    "action": "escape-run",
+    "eyeWho": "alien",
+    "note": "escape-run",
+    "entry": "cut"
+  },
+  {
+    "scene": 5,
+    "from": 46.46,
+    "to": 48.28,
+    "kind": "wide",
+    "focus": [
+      540,
+      1030
+    ],
+    "zoom": 1,
+    "acting": "idea",
+    "action": "door-reveal",
+    "eyeWho": "azi",
+    "note": "door-reveal",
+    "entry": "cut"
+  },
+  {
+    "scene": 5,
+    "from": 48.28,
+    "to": 50.11,
+    "kind": "eyes",
+    "focus": [
+      540,
+      1010
+    ],
+    "zoom": 1,
+    "acting": "",
+    "action": "double-blink",
+    "eyeWho": "azi",
+    "note": "double-blink",
+    "entry": "cut"
+  },
+  {
+    "scene": 5,
+    "from": 50.11,
+    "to": 52.18,
+    "kind": "split",
+    "focus": [
+      540,
+      1000
+    ],
+    "zoom": 1,
+    "acting": "",
+    "action": "no-eyelids",
+    "eyeWho": "azi",
+    "note": "no-eyelids",
+    "entry": "cut"
+  },
+  {
+    "scene": 5,
+    "from": 52.18,
+    "to": 54.24,
+    "kind": "medium",
+    "focus": [
+      500,
+      1040
+    ],
+    "zoom": 1.105,
+    "acting": "",
+    "action": "hair-preparation",
+    "eyeWho": "azi",
+    "note": "hair-preparation",
+    "entry": "cut"
+  },
+  {
+    "scene": 5,
+    "from": 54.24,
+    "to": 56.82,
+    "kind": "medium",
+    "focus": [
+      530,
+      1150
+    ],
+    "zoom": 1.105,
+    "acting": "",
+    "action": "hair-kiss-enter",
+    "eyeWho": "azi",
+    "note": "hair-kiss-enter",
+    "entry": "cut"
+  },
+  {
+    "scene": 6,
+    "from": 56.82,
+    "to": 58.62,
+    "kind": "wide",
+    "focus": [
+      540,
+      1050
+    ],
+    "zoom": 1,
+    "acting": "",
+    "action": "black-curtains",
+    "eyeWho": "azi",
+    "note": "black-curtains",
+    "entry": "cut"
+  },
+  {
+    "scene": 6,
+    "from": 58.62,
+    "to": 60.52,
+    "kind": "detail",
+    "focus": [
+      800,
+      770
+    ],
+    "zoom": 1.28,
+    "acting": "",
+    "action": "one-lamp",
+    "eyeWho": "azi",
+    "note": "one-lamp",
+    "entry": "cut"
+  },
+  {
+    "scene": 6,
+    "from": 60.52,
+    "to": 62.32,
+    "kind": "medium",
+    "focus": [
+      590,
+      1380
+    ],
+    "zoom": 1.105,
+    "acting": "",
+    "action": "barricade",
+    "eyeWho": "azi",
+    "note": "barricade",
+    "entry": "cut"
+  },
+  {
+    "scene": 6,
+    "from": 62.32,
+    "to": 64.12,
+    "kind": "split",
+    "focus": [
+      540,
+      1050
+    ],
+    "zoom": 1,
+    "acting": "",
+    "action": "outside-closed",
+    "eyeWho": "azi",
+    "note": "outside-closed",
+    "entry": "cut"
+  },
+  {
+    "scene": 6,
+    "from": 64.12,
+    "to": 65.74,
+    "kind": "medium",
+    "focus": [
+      450,
+      1150
+    ],
+    "zoom": 1.105,
+    "acting": "relief",
+    "action": "relieved",
+    "eyeWho": "azi",
+    "note": "relieved",
+    "entry": "cut"
+  },
+  {
+    "scene": 7,
+    "from": 65.74,
+    "to": 67.49,
+    "kind": "wide",
+    "focus": [
+      420,
+      1240
+    ],
+    "zoom": 1,
+    "acting": "",
+    "action": "lie-down",
+    "eyeWho": "azi",
+    "note": "lie-down",
+    "entry": "cut"
+  },
+  {
+    "scene": 7,
+    "from": 67.49,
+    "to": 69.29,
+    "kind": "medium",
+    "focus": [
+      450,
+      1060
+    ],
+    "zoom": 1.105,
+    "acting": "",
+    "action": "flashback-run",
+    "eyeWho": "azi",
+    "note": "flashback-run",
+    "entry": "cut"
+  },
+  {
+    "scene": 7,
+    "from": 69.29,
+    "to": 71.09,
+    "kind": "detail",
+    "focus": [
+      380,
+      1010
+    ],
+    "zoom": 1.28,
+    "acting": "",
+    "action": "mascara-tears",
+    "eyeWho": "azi",
+    "note": "mascara-tears",
+    "entry": "cut"
+  },
+  {
+    "scene": 7,
+    "from": 71.09,
+    "to": 72.94,
+    "kind": "eyes",
+    "focus": [
+      420,
+      1060
+    ],
+    "zoom": 1,
+    "acting": "",
+    "action": "two-smudges",
+    "eyeWho": "azi",
+    "note": "two-smudges",
+    "entry": "impact"
+  },
+  {
+    "scene": 7,
+    "from": 72.94,
+    "to": 74.84,
+    "kind": "split",
+    "focus": [
+      600,
+      1010
+    ],
+    "zoom": 1,
+    "acting": "",
+    "action": "alien-twin",
+    "eyeWho": "alien",
+    "note": "alien-twin",
+    "entry": "cut"
+  },
+  {
+    "scene": 7,
+    "from": 74.84,
+    "to": 76.46,
+    "kind": "detail",
+    "focus": [
+      260,
+      1260
+    ],
+    "zoom": 1.28,
+    "acting": "",
+    "action": "wipe-then-lash",
+    "eyeWho": "azi",
+    "note": "wipe-then-lash",
+    "entry": "cut"
+  },
+  {
+    "scene": 8,
+    "from": 76.46,
+    "to": 78.41,
+    "kind": "medium",
+    "focus": [
+      460,
+      1090
+    ],
+    "zoom": 1.105,
+    "acting": "wink",
+    "action": "safe-wink",
+    "eyeWho": "azi",
+    "note": "safe-wink",
+    "entry": "cut"
+  },
+  {
+    "scene": 8,
+    "from": 78.41,
+    "to": 80.21,
+    "kind": "detail",
+    "focus": [
+      330,
+      1540
+    ],
+    "zoom": 1.28,
+    "acting": "",
+    "action": "charge-phone",
+    "eyeWho": "azi",
+    "note": "charge-phone",
+    "entry": "cut"
+  },
+  {
+    "scene": 8,
+    "from": 80.21,
+    "to": 82.16,
+    "kind": "medium",
+    "focus": [
+      550,
+      1050
+    ],
+    "zoom": 1.105,
+    "acting": "sip",
+    "action": "sip-tea",
+    "eyeWho": "azi",
+    "note": "sip-tea",
+    "entry": "cut"
+  },
+  {
+    "scene": 8,
+    "from": 82.16,
+    "to": 84.06,
+    "kind": "wide",
+    "focus": [
+      500,
+      1260
+    ],
+    "zoom": 1,
+    "acting": "",
+    "action": "land-on-bed",
+    "eyeWho": "azi",
+    "note": "land-on-bed",
+    "entry": "cut"
+  },
+  {
+    "scene": 8,
+    "from": 84.06,
+    "to": 85.96,
+    "kind": "brand",
+    "focus": [
+      540,
+      960
+    ],
+    "zoom": 1,
+    "acting": "wink",
+    "action": "invasion-vs-lashes",
+    "eyeWho": "azi",
+    "note": "invasion-vs-lashes",
+    "entry": "cut"
+  },
+  {
+    "scene": 8,
+    "from": 85.96,
+    "to": 88.0,
+    "kind": "eyes",
+    "focus": [
+      540,
+      950
+    ],
+    "zoom": 1,
+    "acting": "wink",
+    "action": "last-wink",
+    "eyeWho": "azi",
+    "note": "last-wink",
+    "entry": "cut"
+  }
+]

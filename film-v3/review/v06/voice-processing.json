@@ -1,0 +1,26 @@
+[
+  {
+    "name": "velvet",
+    "formant_ratio": 0.94,
+    "pitch_ratio": 0.88,
+    "original_pitch_median_hz": 215.42655598528103,
+    "target_pitch_median_hz": 189.5753692670473,
+    "duration_seconds": 86.86441666666667,
+    "samples": 4169492,
+    "timing_preserved": true,
+    "method": "Praat PSOLA/formant transformation of the actual recorded performance, not new TTS",
+    "path": "/workspace/azi/film-v3/private/v06/voice-velvet.wav"
+  },
+  {
+    "name": "smoky",
+    "formant_ratio": 0.91,
+    "pitch_ratio": 0.84,
+    "original_pitch_median_hz": 215.42655598528103,
+    "target_pitch_median_hz": 180.95830702763607,
+    "duration_seconds": 86.86441666666667,
+    "samples": 4169492,
+    "timing_preserved": true,
+    "method": "Praat PSOLA/formant transformation of the actual recorded performance, not new TTS",
+    "path": "/workspace/azi/film-v3/private/v06/voice-smoky.wav"
+  }
+]

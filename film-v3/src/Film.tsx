@@ -18,7 +18,6 @@ import {
   ShotContext,
   shotAt,
   EyeStrip,
-  ComicTransition,
   ComicInset,
   useComicShot,
 } from "./ComicEdit";
@@ -910,7 +909,6 @@ export function Film() {
           boxShadow: "inset 0 0 0 15px #100f18",
         }}
       />
-      <ComicTransition time={t} shot={shot} />
     </AbsoluteFill>
   );
 }

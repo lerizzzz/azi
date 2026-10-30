@@ -1,0 +1,92 @@
+[
+  {
+    "name": "azi-startled",
+    "file": "v06/azi-startled.png",
+    "bytes": 1350040,
+    "sha256": "6ef9fe387b4c530932fc8c2459713061ad376e00aa3ca464b5bcd888c584d3ab",
+    "dimensions": [
+      941,
+      1672
+    ]
+  },
+  {
+    "name": "azi-deadpan",
+    "file": "v06/azi-deadpan.png",
+    "bytes": 1198215,
+    "sha256": "84ea57e9ce99cae6ff22f43c9cbc0a570c17fc16dd069d80d77d730ee93446cb",
+    "dimensions": [
+      941,
+      1671
+    ]
+  },
+  {
+    "name": "azi-idea",
+    "file": "v06/azi-idea.png",
+    "bytes": 1377726,
+    "sha256": "e18b11e7d256b22cbf3ab39b718e984e452ad3744fcc1f357986934cec457375",
+    "dimensions": [
+      941,
+      1672
+    ]
+  },
+  {
+    "name": "azi-relief",
+    "file": "v06/azi-relief.png",
+    "bytes": 1405453,
+    "sha256": "d9538669d081db77bad2834c8e22b5a852d09a31bacfe0769b61e39d71e7f489",
+    "dimensions": [
+      941,
+      1672
+    ]
+  },
+  {
+    "name": "azi-ear-speaking",
+    "file": "v06/azi-ear-speaking.png",
+    "bytes": 1256974,
+    "sha256": "bc6e50b73992ddb9c93360f7f9e769a34f73a858f816c7a19ca2215c9d9e2acb",
+    "dimensions": [
+      941,
+      1672
+    ]
+  },
+  {
+    "name": "tea-wink",
+    "file": "v06/tea-wink.png",
+    "bytes": 2003098,
+    "sha256": "988058e303afee63811a6424db79442a6393878e46b1a3ca07bfa974a817f854",
+    "dimensions": [
+      1024,
+      1536
+    ]
+  },
+  {
+    "name": "tea-sip",
+    "file": "v06/tea-sip.png",
+    "bytes": 2024098,
+    "sha256": "f3edc0e698a9d860ec1f2533feaa079f770c23703eec24d430d211719e73f09e",
+    "dimensions": [
+      1024,
+      1536
+    ]
+  },
+  {
+    "name": "alien-question",
+    "file": "v06/alien-question.png",
+    "bytes": 656847,
+    "sha256": "73d02021ad36aede207618ef70ab4714e4b260eddd7d63ced9ae9d6d131d69fc",
+    "dimensions": [
+      941,
+      1671
+    ]
+  },
+  {
+    "name": "treatment-wipe",
+    "file": "v06/treatment-wipe.png",
+    "bytes": 1599995,
+    "sha256": "6c0ea177226a42f13b17f5c05038a95aec51745b77c783ab92414bf5f839a665",
+    "dimensions": [
+      1774,
+      887
+    ]
+  }
+]

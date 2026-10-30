@@ -1,0 +1,12 @@
+{
+  "duration": 88.0,
+  "frames": 2640,
+  "source_performance_seconds": 86.86441666666667,
+  "scenes": 8,
+  "shots": 46,
+  "min_shot_seconds": 1.4399999999999977,
+  "max_shot_seconds": 2.5799999999999983,
+  "semantic_accents": 77,
+  "white_swipe": false,
+  "source_audio_sha256": "db8f6f71f00f017d1b2194ef7f4914166da9a2842cf5b7e6acda324eec82d154"
+}

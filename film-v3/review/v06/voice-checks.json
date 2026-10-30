@@ -1,0 +1,10 @@
+{
+  "original_median_hz": 215.48450174885917,
+  "processed_median_hz": 180.90676766796423,
+  "pitch_contour_correlation_log": 0.9802892014690828,
+  "median_pitch_ratio": 0.8384036269054767,
+  "voiced_frames_compared": 4570,
+  "original_seconds": 86.86441666666667,
+  "processed_seconds": 86.86441666666667,
+  "scope": "Objective pitch/timing checks. They do not certify perceived huskiness, voice identity or accent."
+}
