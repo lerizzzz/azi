@@ -1,0 +1,27 @@
+[
+  {
+    "file": "anatomy-test-before-last-adjustments.mp4",
+    "bytes": 1021637,
+    "sha256": "9988b2ccb9c063a8efb94a0f49d0609c6755a0e3683a67f232f366bebbbd198b"
+  },
+  {
+    "file": "man-first-drawing.png",
+    "bytes": 1552694,
+    "sha256": "0fd96188e0bfe0badd130566a34762e2bf361eba29d2cd0818c5fb35d4255255"
+  },
+  {
+    "file": "master-first-drawing.png",
+    "bytes": 1436965,
+    "sha256": "06f0a059b2a8d4ed6ba28eaaad38f1307c1cef278db8c86049cd891a42b67498"
+  },
+  {
+    "file": "shoe-removal-rejected-extra-shoe.png",
+    "bytes": 1619648,
+    "sha256": "50d20a601c5e47411116913002c368e9434d41a9f8a26df2bbade7ac5f901d1a"
+  },
+  {
+    "file": "walk-rejected-repeated-phase.png",
+    "bytes": 1051530,
+    "sha256": "a82b755de3d837c01a7dfcad805f9295e76309179cbc3fb633e6f0ab9606e568"
+  }
+]

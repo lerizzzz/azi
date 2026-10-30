@@ -1,0 +1,23 @@
+[
+  {
+    "file": "azi-lashes-v05-sources.zip",
+    "bytes": 85468512,
+    "entries": 273,
+    "sha256": "47d9950093d46592c5b55de0ba013e19a49399e48bda1e464bea9af25ae99232",
+    "crc": "passed"
+  },
+  {
+    "file": "azi-lashes-v05-video.zip",
+    "bytes": 53956746,
+    "entries": 5,
+    "sha256": "8201b82391b9041c67957ad35d870ffeb9f6cb9a34c8207898ae3c4d7f826cd1",
+    "crc": "passed"
+  },
+  {
+    "file": "azi-lashes-v05-workfiles.zip",
+    "bytes": 89261073,
+    "entries": 387,
+    "sha256": "27d95d62f4094b0850013851585bc94e6978a63bd92d797fe54cfbb466f5802d",
+    "crc": "passed"
+  }
+]
