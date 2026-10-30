@@ -15,3 +15,7 @@ review/v04/validate/
 review/**/*.log
 review/v04/decoded/
 review/v04/walk-sequence/
+
+review/v05/validate/
+review/v05/decoded/
+review/v05/walk-sequence/

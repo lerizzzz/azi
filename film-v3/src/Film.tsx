@@ -6,7 +6,14 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { SeamlessRig as RigImpl, Face, actorPose } from "./SeamlessRig";
+import {
+  IllustratedActor as RigImpl,
+  WholeDrawing,
+  IntegratedTreatment,
+  TeaDrawing,
+  actorPoint,
+  AssetGate,
+} from "./IllustratedActor";
 import {
   ShotContext,
   shotAt,
@@ -217,37 +224,32 @@ const Head = ({
   s = 1.2,
   face = "neutral",
   smudge = false,
-  viewer = false,
-}: P) => (
-  <div
-    style={{
-      position: "absolute",
-      left: x,
-      top: y,
-      width: 600 * s,
-      height: 640 * s,
-      transform: `rotate(${Math.sin(t * 1.4) * 1.2}deg)`,
-    }}
-  >
-    <svg viewBox="0 0 554 588" width={600 * s} height={(600 * s * 588) / 554}>
-      <Face
-        who="azi"
-        time={t}
-        state={face}
-        viewer={viewer}
-        x={0}
-        y={0}
-        width={554}
+}: P) =>
+  smudge ? (
+    <WholeDrawing
+      name="azi-smudge"
+      time={t}
+      width={700 * s}
+      height={(700 * s * 1671) / 941}
+      kind={0}
+      style={{ left: x, top: y }}
+    />
+  ) : (
+    <svg
+      viewBox="285 0 330 700"
+      width={600 * s}
+      height={(600 * s * 700) / 330}
+      style={{ position: "absolute", left: x, top: y, overflow: "hidden" }}
+    >
+      <image
+        href={staticFile(
+          face === "blink" ? "v05/azi-blink.png" : "v05/azi-bare.png",
+        )}
+        width="941"
+        height="1672"
       />
-      {smudge && (
-        <g fill="#17111c" opacity=".86">
-          <path d="M173 316 Q190 311 213 310 Q215 333 205 349 C191 365 199 382 189 398 C176 385 185 369 174 359 Q165 345 173 316Z" />
-          <path d="M329 278 Q348 271 368 266 Q371 293 364 318 C353 340 361 360 352 378 C338 363 345 345 337 332 Q328 312 329 278Z" />
-        </g>
-      )}
     </svg>
-  </div>
-);
+  );
 const Phone = ({ x = 700, y = 1000, s = 1, r = 0 }: P) =>
   image("props/phone.png", {
     left: x,
@@ -255,59 +257,6 @@ const Phone = ({ x = 700, y = 1000, s = 1, r = 0 }: P) =>
     width: 90 * s,
     transform: `rotate(${r}deg)`,
   });
-const Bed = ({ x = 130, y = 1240, s = 1, r = 0 }: P) => (
-  <div
-    style={{
-      position: "absolute",
-      left: x,
-      top: y,
-      transform: `scale(${s}) rotate(${r}deg)`,
-      transformOrigin: "0 0",
-    }}
-  >
-    <svg width="960" height="560" viewBox="-30 -100 990 660">
-      <ellipse
-        cx="480"
-        cy="438"
-        rx="450"
-        ry="54"
-        fill="#100e19"
-        opacity=".22"
-      />
-      <path
-        d="M95 92 L67 376 L101 383 L133 118 M785 300 L792 481 L827 481 L827 287 M858 210 L890 389"
-        fill="#201b28"
-        stroke="#0c0b12"
-        strokeWidth="9"
-      />
-      <path
-        d="M45 -34 L921 205 L858 354 L-5 108Z"
-        fill="#18141f"
-        stroke="#100d16"
-        strokeWidth="10"
-      />
-      <path
-        d="M50 -62 L930 177 Q951 189 932 220 L866 321 Q858 337 833 328 L-8 88 Q-26 80 -13 52 L28 -47Q34 -65 50 -62Z"
-        fill="#29222f"
-        stroke="#100d17"
-        strokeWidth="9"
-      />
-      <path d="M52 -37 L896 193 L842 300 L17 67Z" fill="#342c3a" />
-      <path
-        d="M75 -12 L224 28 L193 105 L35 64Z"
-        fill="#443747"
-        stroke="#110e18"
-        strokeWidth="6"
-      />
-      <path
-        d="M245 40 L852 205 M25 88 L851 321"
-        stroke="#6b5767"
-        strokeWidth="3"
-        opacity=".6"
-      />
-    </svg>
-  </div>
-);
 const Studio = ({ dark = false }: P) => (
   <>
     {image(dark ? "v04/studio-dark.png" : "v04/studio-light.png", {
@@ -316,43 +265,7 @@ const Studio = ({ dark = false }: P) => (
       height: 1920,
       objectFit: "cover",
     })}
-    <Svg>
-      <path
-        d="M865 1660 Q745 1460 790 1190 Q812 1090 962 1080"
-        stroke="#100e17"
-        strokeWidth="13"
-        fill="none"
-      />
-      <path
-        d="M852 1093 Q900 1050 973 1080"
-        stroke={dark ? "#48404b" : "#f2eee3"}
-        strokeWidth="17"
-        fill="none"
-      />
-    </Svg>
   </>
-);
-const Master = ({
-  t = 0,
-  x = 720,
-  y = 930,
-  s = 0.9,
-  work = false,
-  task,
-  onlyArm = false,
-  tool,
-}: P) => (
-  <RigImpl
-    who="master"
-    time={work ? t : 0}
-    x={x + 120 * s}
-    y={y + 500 * s}
-    scale={s}
-    phone={false}
-    task={work ? (task ?? "push") : undefined}
-    onlyArm={onlyArm}
-    tool={tool}
-  />
 );
 const Door = ({ open = 0 }: P) => (
   <Svg>
@@ -388,13 +301,13 @@ const Door = ({ open = 0 }: P) => (
 function releasedPhone(dt: number) {
   const k = 2.2;
   const bodyLift = ease((k - 1) / 2.4);
-  const armLift = ease((k - 1.4) / 2.2);
-  const wrist = actorPose({ who: "man", time: k, lift: armLift, phone: true })
-    .wrists.left;
-  return {
-    x: 540 + wrist.x * 0.82 - 25 + 35 * dt,
-    y: 1330 - bodyLift * 950 + wrist.y * 0.82 - 42 + 450 * dt * dt,
-  };
+  const p = actorPoint(
+    "man-film",
+    { x: 540, y: 1330 - bodyLift * 950, scale: 0.82 },
+    664,
+    120,
+  );
+  return { x: p.x - 20 + 35 * dt, y: p.y - 40 + 450 * dt * dt };
 }
 function Scene({
   n,
@@ -463,7 +376,7 @@ function Scene({
               mode="quip"
               progress={ease(a(2))}
             />
-            <Bubble x={90} y={450} w={640}>
+            <Bubble x={90} y={315} w={640}>
               Свиданьице.
             </Bubble>
           </>
@@ -541,7 +454,7 @@ function Scene({
                 x={540}
                 y={1330 - lift * 950 - ease((a(2) - 3.4) / 1) * 1100}
                 scale={0.82}
-                lift={ease((a(2) - 1.4) / 2.2)}
+                lift={a(2) > 0.7 ? Math.max(0.03, ease((a(2) - 1) / 2.4)) : 0}
                 filming={1}
                 selfie={0}
                 phone={a(2) < 2.2}
@@ -607,12 +520,12 @@ function Scene({
               who="azi"
               time={t}
               x={550}
-              y={1450}
-              scale={0.95}
+              y={1270}
+              scale={0.9}
               phone={false}
               shoes={t > 1.8}
               barefoot={t > 1.8}
-              action="idle"
+              action={t < 1.8 ? "reach" : "idle"}
             />
             <Tag>Снимаем каблучки, берём в ручки</Tag>
             {t > 2 && <Text y={1680}>И БЕЖИМ К ДЕВОЧКАМ</Text>}
@@ -626,7 +539,7 @@ function Scene({
                 style={{
                   position: "absolute",
                   inset: 0,
-                  filter: i === 2 ? "hue-rotate(18deg)" : "none",
+                  filter: "none",
                 }}
               >
                 <Rig
@@ -642,27 +555,7 @@ function Scene({
                 />
               </div>
             ))}
-            <Svg>
-              <g
-                transform={`translate(${350 + Math.sin(t * 4) * 15} 1010) rotate(-12)`}
-              >
-                <path
-                  d="M0 0 L230 20 L220 330 L0 290Z"
-                  fill="#e6c855"
-                  stroke={ink}
-                  strokeWidth="7"
-                />
-                <text x="20" y="95" fontFamily="Neucha" fontSize="42">
-                  РЕКИ
-                </text>
-                <text x="15" y="160" fontFamily="Neucha" fontSize="40">
-                  КАНАЛЫ
-                </text>
-                <text x="25" y="240" fontFamily="Neucha" fontSize="55">
-                  −50%
-                </text>
-              </g>
-            </Svg>
+
             {t > q(5) - 0.5 && (
               <Rig
                 who="azi"
@@ -799,20 +692,28 @@ function Scene({
   if (n === 6)
     return (
       <>
-        <Studio t={t} dark />
-        <Rig
-          who="azi"
-          time={t}
-          x={220}
-          y={1340}
-          scale={0.63}
-          phone={false}
-          barefoot
-        />
-        <Bed x={210 + ease(a(1) / 2) * 250} y={1320} s={0.85} r={-12} />
-        <Master t={t} x={680} y={1010} s={0.72} work />
-        <Master t={t + 1} x={60} y={1170} s={0.55} work />
-        {image("props/shoes.png", { left: 60, top: 1680, width: 140 })}
+        <Studio dark />
+        {t < 7.7 ? (
+          <WholeDrawing
+            name="barricade"
+            time={t}
+            width={1000}
+            height={(1000 * 1024) / 1536}
+            kind={2}
+            style={{ left: 160 - 120 * ease(a(1) / 1.7), top: 1040 }}
+          />
+        ) : (
+          <Rig
+            who="azi"
+            time={t}
+            x={450}
+            y={1400}
+            scale={0.69}
+            phone={false}
+            shoes
+            barefoot
+          />
+        )}
         <Tag y={130}>
           {t < q(1)
             ? "ТИХО. ГОРИТ ОДНА ЛАМПА."
@@ -847,31 +748,8 @@ function Scene({
         ) : (
           <>
             <Studio t={t} />
-            <Master t={t} x={220} y={1090} s={0.62} work task="treat" />
-            <Bed y={1280} x={40} s={1} />
-            <Rig
-              who="azi"
-              time={t}
-              x={530}
-              y={1435}
-              scale={0.57}
-              rotation={-72}
-              phone={false}
-              barefoot
-              face={t > q(3) + 0.8 ? "blink" : "neutral"}
-            />
-            <Master
-              t={t}
-              x={220}
-              y={1090}
-              s={0.62}
-              work
-              task="treat"
-              onlyArm
-              tool={
-                t >= q(3) ? (a(3) < 0.8 ? "cotton" : "tweezers") : undefined
-              }
-            />
+            <IntegratedTreatment time={t} x={-45} y={1000} width={1320} />
+            {image("props/shoes.png", { left: 650, top: 1640, width: 140 })}
             <Tag y={130}>
               {t < q(1)
                 ? "СРАЗУ — НА КУШЕТОЧКУ."
@@ -887,63 +765,52 @@ function Scene({
       <Studio t={t} />
       {t < q(3) ? (
         <>
-          <Bed x={90} y={1250} />
-          <Rig
-            who="azi"
-            time={t}
-            x={380 + 150 * ease((a(2) - 3) / 1.2)}
-            y={1320 + 115 * ease((a(2) - 3) / 1.2)}
-            scale={0.87 - 0.3 * ease((a(2) - 3) / 1.2)}
-            rotation={-72 * ease((a(2) - 3) / 1.2)}
-            cup={a(2) > 1 && a(2) < 3}
-            phone={false}
-            barefoot
-            mode="quip"
-            progress={1}
-          />
-          <Master t={t} x={760} y={980} s={0.65} />
+          {t < q(2) + 3.5 ? (
+            <TeaDrawing time={t} x={155} y={535} width={770} />
+          ) : (
+            <IntegratedTreatment time={t} x={-45} y={970} width={1320} />
+          )}
           <Svg>
             <path
-              d="M80 1590 H1000 V1650 H80Z"
+              d="M75 1700 H440 V1755 H75Z"
               fill="#5c353c"
               stroke={ink}
-              strokeWidth="8"
+              strokeWidth="7"
             />
             <path
-              d="M120 1650 V1820 M950 1650 V1820"
+              d="M100 1755 V1900 M415 1755 V1900"
               stroke={ink}
-              strokeWidth="20"
+              strokeWidth="14"
             />
-            <g opacity={a(2) > 1 && a(2) < 3 ? 0 : 1}>
-              {" "}
-              <path
-                d="M690 1530 L700 1410 H820 L815 1530Z"
-                fill="#ebe5d7"
-                stroke={ink}
-                strokeWidth="8"
+            <g transform="translate(95 1660) rotate(-10 100 50)">
+              <rect
+                width="200"
+                height="100"
+                rx="12"
+                fill="#11121c"
+                stroke="#77717b"
+                strokeWidth="4"
+              />
+              <rect
+                x="10"
+                y="9"
+                width="180"
+                height="78"
+                rx="7"
+                fill="#e0d8ca"
               />
               <path
-                d="M820 1430 Q890 1430 870 1500 L820 1500"
-                fill="none"
-                stroke={ink}
-                strokeWidth="12"
+                d="M92 27 L77 52 H95 L85 73 L113 44 H96 L106 27Z"
+                fill="#8b3049"
               />
               <path
-                d="M730 1400 Q700 1360 735 1320 M775 1390 Q750 1350 785 1310"
+                d="M100 100 V130 Q150 210 225 165 L290 130"
                 fill="none"
-                stroke="#f4e7d2"
+                stroke="#e2dace"
                 strokeWidth="7"
-                opacity={0.5 + 0.25 * Math.sin(t * 3)}
               />
-            </g>{" "}
-            <path
-              d="M410 1620 Q480 1720 610 1620"
-              fill="none"
-              stroke="#ded9cb"
-              strokeWidth="8"
-            />
+            </g>
           </Svg>
-          <Phone x={300} y={1505} s={0.85} r={80} />
           <Tag y={130}>ТЫ В БЕЗОПАСНОСТИ.</Tag>
         </>
       ) : (
@@ -1019,6 +886,7 @@ export function Film() {
         fontFamily: "Neucha",
       }}
     >
+      <AssetGate />
       <style>{`@font-face{font-family:Neucha;src:url('${staticFile("fonts/Neucha.ttf")}')}`}</style>
       <ShotContext.Provider value={shot}>
         <div

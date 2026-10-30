@@ -1,0 +1,16 @@
+import {build} from 'esbuild';
+import {createRequire} from 'node:module';
+import fs from 'node:fs';
+await build({entryPoints:['src/ComicEdit.tsx','src/IllustratedActor.tsx'],bundle:true,platform:'node',format:'cjs',packages:'external',outdir:'review/v05/validate'});
+const require=createRequire(import.meta.url);
+const {shots}=require('../review/v05/validate/ComicEdit.js');
+const {chooseDrawing}=require('../review/v05/validate/IllustratedActor.js');
+const lengths=shots.map(s=>s.to-s.from);
+if(lengths.some(n=>n<1.9||n>3.01))throw Error('Shot length outside 2–3s');
+const choices={phone:chooseDrawing({who:'azi',time:0,phone:true}),barefoot:chooseDrawing({who:'azi',time:0,barefoot:true,shoes:true}),ear:chooseDrawing({who:'azi',time:0,barefoot:true,shoes:true,gesture:'ear'}),holdingPhoneInBeam:chooseDrawing({who:'man',time:0,phone:true,lift:.1}),releasedPhone:chooseDrawing({who:'man',time:0,phone:false,lift:.5})};
+if(choices.holdingPhoneInBeam!=='man-surprise'||choices.releasedPhone!=='man-lift')throw Error('Phone release binding failed');
+const phases=[.05,.3,.5,.75].map(time=>chooseDrawing({who:'azi',time:time*.88,walking:true,barefoot:true,shoes:true}));
+if(new Set(phases).size!==4)throw Error('Walk phases repeated');
+fs.writeFileSync('review/v05/shotlist.json',JSON.stringify(shots,null,2));
+fs.writeFileSync('review/v05/edit-checks.json',JSON.stringify({shots:shots.length,minShotSeconds:Math.min(...lengths),maxShotSeconds:Math.max(...lengths),walkDrawings:phases,choices,scope:'Asset/timing bindings only. This does not certify natural gait or anatomical quality.'},null,2));
+console.log('PASS 40-shot timing, four drawing bindings and phone release states');

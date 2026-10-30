@@ -1,0 +1,223 @@
+[
+  {
+    "file": "v05/alien.png",
+    "size": [
+      941,
+      1672
+    ],
+    "bytes": 661733,
+    "sha256": "32c65f8402c3c1d7c681474d0d178bbef5d66af3551ad76bafd848b2b993392c",
+    "alpha_extrema": [
+      0,
+      255
+    ]
+  },
+  {
+    "file": "v05/azi-bare.png",
+    "size": [
+      941,
+      1672
+    ],
+    "bytes": 1399686,
+    "sha256": "0bc012911b7898b14ae542c43ce033bcffd5d01b4052220508521097371ed99b",
+    "alpha_extrema": [
+      0,
+      255
+    ]
+  },
+  {
+    "file": "v05/azi-blink.png",
+    "size": [
+      941,
+      1671
+    ],
+    "bytes": 1295774,
+    "sha256": "ad0ffca67009f954450cb3b495655030231f7b6899e6d0e5b29e079d8d76e5d8",
+    "alpha_extrema": [
+      0,
+      255
+    ]
+  },
+  {
+    "file": "v05/azi-door.png",
+    "size": [
+      1308,
+      1202
+    ],
+    "bytes": 1709013,
+    "sha256": "9da9f5d3affe1bbd680618003d3d5d7dd5323ee70c3b5417e07f5bdb017045e8",
+    "alpha_extrema": [
+      0,
+      255
+    ]
+  },
+  {
+    "file": "v05/azi-ear.png",
+    "size": [
+      941,
+      1672
+    ],
+    "bytes": 1309566,
+    "sha256": "149b1cacf1fb13bf25695c534243e01514fe25339703c96fecad94fa4329356d",
+    "alpha_extrema": [
+      0,
+      255
+    ]
+  },
+  {
+    "file": "v05/azi-phone.png",
+    "size": [
+      941,
+      1671
+    ],
+    "bytes": 1216742,
+    "sha256": "7cb4b3e3e908e0c59dfba8d6376baedf3d613c332c28a7100c86db46617291fc",
+    "alpha_extrema": [
+      0,
+      255
+    ]
+  },
+  {
+    "file": "v05/azi-remove-shoes.png",
+    "size": [
+      941,
+      1672
+    ],
+    "bytes": 1541088,
+    "sha256": "c52765a53c1e50d814981e5e636f69f514a6ea4ab545e7cb2ca8156f1df02397",
+    "alpha_extrema": [
+      0,
+      255
+    ]
+  },
+  {
+    "file": "v05/azi-smudge.png",
+    "size": [
+      941,
+      1671
+    ],
+    "bytes": 2204416,
+    "sha256": "0fac1abf0814b2e7bfdc94836bd32e590610ff56563ab3f152afdbb009005467",
+    "alpha_extrema": [
+      0,
+      255
+    ]
+  },
+  {
+    "file": "v05/azi-walk.png",
+    "size": [
+      1285,
+      1224
+    ],
+    "bytes": 1118717,
+    "sha256": "561ac38d06ac8b56cfd171c424638b5fcf6e3592b6f03213782ba495f8b438d2",
+    "alpha_extrema": [
+      0,
+      255
+    ]
+  },
+  {
+    "file": "v05/barricade.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "bytes": 1799644,
+    "sha256": "b8c60ed60ac555eadfd010ba00c49685ced7068e3cfe4d4628ad4aabe4e9ad79",
+    "alpha_extrema": [
+      0,
+      254
+    ]
+  },
+  {
+    "file": "v05/man-film.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "bytes": 1551216,
+    "sha256": "e78a11e431aebc78200d49386deac7cbeb6eed886a005cf63ca5538cedd1cb7a",
+    "alpha_extrema": [
+      0,
+      254
+    ]
+  },
+  {
+    "file": "v05/man-guide.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "bytes": 1549744,
+    "sha256": "0fb176de57fc0cb6ab29d1e7eb70cb47d719104bee505a620cf6118b5bdd52d2",
+    "alpha_extrema": [
+      0,
+      254
+    ]
+  },
+  {
+    "file": "v05/man-lift.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "bytes": 1749025,
+    "sha256": "fe04f746f0b9037371a2d295c515a731deae454f1e8b78e5255120ae6cfd9d01",
+    "alpha_extrema": [
+      0,
+      254
+    ]
+  },
+  {
+    "file": "v05/man-surprise.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "bytes": 1491028,
+    "sha256": "968f24e5502f9a7d7983a1cd464f05a675cd8ad378b64756158cc4cb8da55e21",
+    "alpha_extrema": [
+      0,
+      254
+    ]
+  },
+  {
+    "file": "v05/master.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "bytes": 1387005,
+    "sha256": "60da4254dc34c502652db4892e31958784276381ddf7a8f2a2177ae86cc06d3f",
+    "alpha_extrema": [
+      0,
+      254
+    ]
+  },
+  {
+    "file": "v05/tea.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "bytes": 1981288,
+    "sha256": "2b642f7224a10259377ddb01b5026eec0a6c373f922d4b60c50997d463ceafbf",
+    "alpha_extrema": [
+      0,
+      254
+    ]
+  },
+  {
+    "file": "v05/treatment.png",
+    "size": [
+      1774,
+      887
+    ],
+    "bytes": 1642686,
+    "sha256": "226e6080f4b5386d3f13318d16a90a8334daddb4348c22cd5b93b435583ea648",
+    "alpha_extrema": [
+      0,
+      255
+    ]
+  }
+]

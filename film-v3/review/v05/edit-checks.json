@@ -1,0 +1,19 @@
+{
+  "shots": 40,
+  "minShotSeconds": 2,
+  "maxShotSeconds": 2.960000000000022,
+  "walkDrawings": [
+    "walk-0",
+    "walk-1",
+    "walk-2",
+    "walk-3"
+  ],
+  "choices": {
+    "phone": "azi-phone",
+    "barefoot": "azi-bare",
+    "ear": "azi-ear",
+    "holdingPhoneInBeam": "man-surprise",
+    "releasedPhone": "man-lift"
+  },
+  "scope": "Asset/timing bindings only. This does not certify natural gait or anatomical quality."
+}

@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { Face } from "./SeamlessRig";
+import { IllustratedFace as Face } from "./IllustratedActor";
 import timing from "./timing.json";
 export type Shot = {
   scene: number;

@@ -1,3 +1,26 @@
+# AZI LASHES • V05
+
+Текущая версия использует цельные рисованные позы в исходном стиле (`IllustratedActor.tsx`, `public/v05/`) вместо смешения детальных голов с упрощёнными SVG-телами V04. Волосы и тело находятся в одном рисунке. Это ограниченная рисованная анимация с четырьмя ключевыми позами прохода; полноценная покадровая плавность не заявляется. Папка film-v3 — историческое имя проекта.
+
+## Повторить экспорт V05
+
+Нужны Node 24, FFmpeg, Chromium и Python 3 с Pillow/numpy/scipy для контрольных листов. Вся графика, шрифт и готовый исходный микс уже локальны, платные сервисы для повторного рендера не нужны.
+
+```sh
+npm ci
+npm run lint
+node tools/validate-v05.mjs
+mkdir -p review/v05
+npx remotion render src/index.ts AziFilm review/v05/picture.mp4 --browser-executable=/usr/bin/chromium --gl=swangle --concurrency=2 --codec=h264 --crf=18
+python3 tools/export-v05.py
+python3 tools/review-v05.py
+python3 tools/package-v05.py
+```
+
+Выходы: out/v05/azi-lashes-v05-1080.mp4 и out/v05/azi-lashes-v05-phone.mp4. Сценарий: ../docs/SCREENPLAY_ALIENS_v03.md; новые требования: ../docs/PRODUCTION_REQUIREMENTS_v05.md; точное описание ограничений и проверок: review/v05/REPORT.md. Предыдущие версии ниже — история, а не рекомендации повторять отклонённый стиль.
+
+---
+
 # AZI LASHES • V04
 
 Текущая композиция использует цельную векторную анатомию SeamlessRig и монтаж ComicEdit на 40 планов. Папка film-v3 — историческое имя проекта; актуальная версия — V04. Предыдущие публичные MP4 сохранены отдельно.
