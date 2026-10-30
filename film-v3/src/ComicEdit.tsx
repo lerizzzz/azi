@@ -14,7 +14,7 @@ export type Shot = {
   action?: string;
   entry?: string;
 };
-export const shots:Shot[] = edit as Shot[];
+export const shots: Shot[] = edit as Shot[];
 export function shotAt(t: number) {
   return shots.find((s) => s.from <= t && t < s.to) ?? shots[shots.length - 1];
 }
@@ -55,7 +55,7 @@ export function EyeStrip({ shot, time }: { shot: Shot; time: number }) {
           width={who === "alien" ? 1050 : 1200}
           x={who === "alien" ? -20 : -90}
           y={who === "alien" ? -445 : -335}
-          state={shot.scene === 1 ? "irritated" : "neutral"}
+          state={shot.scene === 7 ? "smudge" : shot.acting || "neutral"}
         />
       </svg>
     </div>

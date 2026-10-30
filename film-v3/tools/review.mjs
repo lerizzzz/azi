@@ -30,7 +30,7 @@ try {
       .map((t) => Math.floor(t * 30));
   }
   for (const frame of frames) {
-    await renderStill({ ...opts, frame, output: `review/v05/frame-${frame}.png` });
+    await renderStill({ ...opts, frame, output: `${process.env.AZI_REVIEW_DIR??"review/v06"}/frame-${frame}.png` });
     console.log(frame);
   }
 } finally {

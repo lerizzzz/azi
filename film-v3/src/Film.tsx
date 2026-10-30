@@ -22,12 +22,23 @@ import {
   useComicShot,
 } from "./ComicEdit";
 import timing from "./timing.json";
+import { SemanticLayer, AnimeImpact } from "./SemanticBeats";
 const Rig = (p: React.ComponentProps<typeof RigImpl>) => {
-  const shot = useComicShot();
+  const shot = useComicShot(),
+    clock = useCurrentFrame() / useVideoConfig().fps;
   return (
     <RigImpl
       key={p.who}
       {...p}
+      acting={
+        p.acting ??
+        (p.who === "alien"
+          ? shot.action === "alien-question" || shot.action === "insert-earbud"
+            ? "question"
+            : undefined
+          : shot.acting)
+      }
+      cueAge={clock - shot.from}
       gaze={
         p.who === "azi" &&
         (p.mode === "notice" || shot.kind === "medium" || shot.kind === "eyes")
@@ -223,6 +234,7 @@ const Head = ({
   s = 1.2,
   face = "neutral",
   smudge = false,
+  viewer = false,
 }: P) =>
   smudge ? (
     <WholeDrawing
@@ -235,17 +247,23 @@ const Head = ({
     />
   ) : (
     <svg
-      viewBox="285 0 330 700"
+      viewBox={viewer ? "300 0 400 800" : "285 0 330 700"}
       width={600 * s}
-      height={(600 * s * 700) / 330}
+      height={600 * s * (viewer ? 800 / 400 : 700 / 330)}
       style={{ position: "absolute", left: x, top: y, overflow: "hidden" }}
     >
       <image
         href={staticFile(
-          face === "blink" ? "v05/azi-blink.png" : "v05/azi-bare.png",
+          viewer
+            ? face === "wink"
+              ? "v06/tea-wink.png"
+              : "v05/tea.png"
+            : face === "blink"
+              ? "v05/azi-blink.png"
+              : "v05/azi-bare.png",
         )}
-        width="941"
-        height="1672"
+        width={viewer ? 1024 : 941}
+        height={viewer ? 1536 : 1672}
       />
     </svg>
   );
@@ -264,6 +282,32 @@ const Studio = ({ dark = false }: P) => (
       height: 1920,
       objectFit: "cover",
     })}
+  </>
+);
+const ClosedStudioExterior = ({ t = 0 }: P) => (
+  <>
+    {image("v06/studio-exterior.png", {
+      inset: 0,
+      width: 1080,
+      height: 1920,
+      objectFit: "cover",
+    })}
+    <Svg>
+      <defs>
+        <clipPath id="curtained-window">
+          <rect x="190" y="790" width="545" height="600" />
+        </clipPath>
+      </defs>
+      <g clipPath="url(#curtained-window)">
+        <path
+          d={`M180 ${820 + ((t * 190) % 510)} H745`}
+          stroke="#b8decb"
+          strokeWidth="5"
+          opacity=".4"
+        />
+      </g>
+    </Svg>
+    <UFO x={600 + Math.sin(t) * 65} y={410} t={t} s={0.6} />
   </>
 );
 const Door = ({ open = 0 }: P) => (
@@ -298,8 +342,8 @@ const Door = ({ open = 0 }: P) => (
   </Svg>
 );
 function releasedPhone(dt: number) {
-  const k = 2.2;
-  const bodyLift = ease((k - 1) / 2.4);
+  const k = 1.0;
+  const bodyLift = ease((k - 0.22) / 1.65);
   const p = actorPoint(
     "man-film",
     { x: 540, y: 1330 - bodyLift * 950, scale: 0.82 },
@@ -318,6 +362,7 @@ function Scene({
   d?: number;
   cues: typeof timing.cues;
 }) {
+  const shot = useComicShot();
   const q = (i: number) => (cues[i] ? cues[i].start : 0);
   const a = (i: number) => t - q(i);
   if (n === 1)
@@ -395,7 +440,7 @@ function Scene({
   if (n === 2) {
     const map = t < q(2);
     const chat = t >= q(4);
-    const lift = ease((a(2) - 1.0) / 2.4);
+    const lift = ease((a(2) - 0.22) / 1.65);
     return (
       <>
         {map ? (
@@ -451,21 +496,23 @@ function Scene({
                 who="man"
                 time={t}
                 x={540}
-                y={1330 - lift * 950 - ease((a(2) - 3.4) / 1) * 1100}
+                y={1330 - lift * 950 - ease((a(2) - 1.9) / 0.75) * 1100}
                 scale={0.82}
-                lift={a(2) > 0.7 ? Math.max(0.03, ease((a(2) - 1) / 2.4)) : 0}
+                lift={
+                  a(2) > 0.1 ? Math.max(0.03, ease((a(2) - 0.22) / 1.65)) : 0
+                }
                 filming={1}
                 selfie={0}
-                phone={a(2) < 2.2}
+                phone={a(2) < 1.0}
               />
             </div>
             <UFO x={550} y={340} t={t} s={0.92} />
-            {a(2) >= 2.2 && a(2) < 4 && (
+            {a(2) >= 1.0 && a(2) < 2.9 && (
               <Phone
-                x={releasedPhone(a(2) - 2.2).x}
-                y={releasedPhone(a(2) - 2.2).y}
+                x={releasedPhone(a(2) - 1.0).x}
+                y={releasedPhone(a(2) - 1.0).y}
                 s={0.7}
-                r={(a(2) - 2.2) * 65}
+                r={(a(2) - 1.0) * 65}
               />
             )}
             <Tag y={110} size={56}>
@@ -509,7 +556,7 @@ function Scene({
     );
   }
   if (n === 3) {
-    const walkT = Math.max(0, t - (q(5) - 0.5));
+    const walkT = Math.max(0, t - (q(5) + 0.44));
     return (
       <>
         <Street court t={t} />
@@ -522,9 +569,9 @@ function Scene({
               y={1270}
               scale={0.9}
               phone={false}
-              shoes={t > 1.8}
-              barefoot={t > 1.8}
-              action={t < 1.8 ? "reach" : "idle"}
+              shoes={t > 1.86}
+              barefoot={t > 1.86}
+              action={t < 1.86 ? "reach" : "idle"}
             />
             <Tag>Снимаем каблучки, берём в ручки</Tag>
             {t > 2 && <Text y={1680}>И БЕЖИМ К ДЕВОЧКАМ</Text>}
@@ -532,34 +579,48 @@ function Scene({
         ) : (
           <>
             <Rig who="alien" time={t} x={550} y={1310} scale={0.73} />
-            {[0, 1, 2].map((i) => (
-              <div
-                key={i}
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  filter: "none",
-                }}
-              >
-                <Rig
-                  who="man"
-                  time={t + i}
-                  x={i === 0 ? 130 : i === 1 ? 920 : 320}
-                  y={i === 2 ? 1430 : 1340}
-                  scale={i === 2 ? 0.66 : 0.62}
-                  phone={false}
-                  filming={0}
-                  selfie={0}
-                  talk={0.6}
-                />
-              </div>
-            ))}
-
-            {t > q(5) - 0.5 && (
+            {t < q(2) + 0.65 && (
               <Rig
                 who="azi"
-                time={walkT}
-                x={-160 + walkT * 416.666 * 0.7}
+                time={t}
+                x={320}
+                y={1370}
+                scale={0.73}
+                phone={false}
+                shoes
+                barefoot
+                acting="idea"
+              />
+            )}
+            {t >= q(2) &&
+              [0, 1, 2].map((i) => (
+                <div
+                  key={i}
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    filter: "none",
+                  }}
+                >
+                  <Rig
+                    who="man"
+                    time={t + i}
+                    x={i === 0 ? 130 : i === 1 ? 920 : 320}
+                    y={i === 2 ? 1430 : 1340}
+                    scale={i === 2 ? 0.66 : 0.62}
+                    phone={false}
+                    filming={0}
+                    selfie={0}
+                    talk={0.6}
+                  />
+                </div>
+              ))}
+
+            {t > q(5) + 0.44 && (
+              <Rig
+                who="azi"
+                time={walkT * 1.1}
+                x={-160 + walkT * 650}
                 y={1440}
                 scale={0.7}
                 phone={false}
@@ -569,19 +630,21 @@ function Scene({
                 action="run"
               />
             )}
-            <Bubble x={70} y={350} w={600} size={51}>
-              {t < q(4)
-                ? "Экскурсию? По рекам и каналам!"
-                : "Для вас — скидка!"}
-            </Bubble>
+            {t >= q(3) && (
+              <Bubble x={70} y={350} w={600} size={51}>
+                {t < q(5) + 0.85
+                  ? "Экскурсию? По рекам и каналам!"
+                  : "Для вас — скидка!"}
+              </Bubble>
+            )}
           </>
         )}
       </>
     );
   }
   if (n === 4) {
-    const move = t > q(2),
-      dt = Math.max(0, a(2));
+    const move = t > q(2) + 0.88,
+      dt = Math.max(0, a(2) - 0.88);
     return (
       <>
         <Street court t={t} />
@@ -589,14 +652,14 @@ function Scene({
         {(!move || dt < 3.2) && (
           <Rig
             who="azi"
-            time={dt}
-            x={move ? 320 + dt * 416.666 * 0.8 : 380}
+            time={move ? dt * 1.1 : t}
+            x={move ? 320 + dt * 760 : 380}
             y={1360}
             scale={0.8}
             phone={false}
             shoes
             barefoot
-            gesture={move || t < 2.6 ? undefined : "ear"}
+            gesture={move || t < 2.46 ? undefined : "ear"}
             walking={move}
             action={move ? "run" : "idle"}
           />
@@ -609,7 +672,7 @@ function Scene({
             strokeWidth="13"
           />
         </Svg>
-        {t > q(0) + 2 && t < q(2) && (
+        {t > 4.15 && t < q(2) && (
           <Bubble x={60} y={330} w={700}>
             Секунду, у меня созвон.
           </Bubble>
@@ -628,15 +691,15 @@ function Scene({
     );
   }
   if (n === 5) {
-    const blinkStart = q(1) + 1;
+    const blinkStart = q(1) + 1.5;
     const blink =
       (t > blinkStart && t < blinkStart + 0.15) ||
       (t > blinkStart + 0.48 && t < blinkStart + 0.64);
     const near = t >= q(1) && t < q(3);
-    const enter = t > q(3) + 3;
+    const enter = t > q(3) + 2.65;
     return (
       <>
-        <Door open={enter ? ease((t - q(3) - 3) / 0.8) : 0} />
+        <Door open={enter ? ease((t - q(3) - 2.65) / 0.55) : 0} />
         <div
           style={{
             position: "absolute",
@@ -669,18 +732,25 @@ function Scene({
         ) : (
           <Rig
             who="azi"
-            time={t}
-            x={enter ? 540 + ease((t - q(3) - 3) / 1.1) * 500 : 500}
+            time={enter ? (t - q(3) - 2.65) * 1.1 : t}
+            walking={enter}
+            action={enter ? "run" : "idle"}
+            x={enter ? 540 + ease((t - q(3) - 2.65) / 0.6) * 500 : 500}
             y={1320}
             scale={0.85}
             phone={false}
             shoes
             barefoot
-            gesture={t < q(3) + 1.3 ? "hair" : "kiss"}
-            actionProgress={ease((a(3) - 1.3) / 1)}
+            gesture={t < q(3) + 2.0 ? "hair" : "kiss"}
+            actionProgress={ease((a(3) - 2.0) / 0.45)}
           />
         )}
-        {t > q(3) + 1.5 && t < q(3) + 3 && (
+        {enter && (
+          <Svg>
+            <path d="M868 520 H1080 V1920 H868Z" fill="#c1c7cf" />
+          </Svg>
+        )}
+        {t > q(3) + 2.05 && t < q(3) + 2.95 && (
           <Text x={790} y={850} size={90} color="#aa304c">
             ♡
           </Text>
@@ -688,11 +758,18 @@ function Scene({
       </>
     );
   }
+  if (n === 6 && shot.action === "outside-closed")
+    return (
+      <>
+        <ClosedStudioExterior t={t} />
+        <Tag y={130}>ДЛЯ КОРАБЛЯ — ЗАКРЫТО.</Tag>
+      </>
+    );
   if (n === 6)
     return (
       <>
         <Studio dark />
-        {t < 7.7 ? (
+        {shot.action !== "relieved" ? (
           <WholeDrawing
             name="barricade"
             time={t}
@@ -747,7 +824,13 @@ function Scene({
         ) : (
           <>
             <Studio t={t} />
-            <IntegratedTreatment time={t} x={-45} y={1000} width={1320} />
+            <IntegratedTreatment
+              time={t}
+              x={-45}
+              y={1000}
+              width={1320}
+              wipe={t >= q(3) && a(3) < 0.75}
+            />
             {image("props/shoes.png", { left: 650, top: 1640, width: 140 })}
             <Tag y={130}>
               {t < q(1)
@@ -764,8 +847,20 @@ function Scene({
       <Studio t={t} />
       {t < q(3) ? (
         <>
-          {t < q(2) + 3.5 ? (
-            <TeaDrawing time={t} x={155} y={535} width={770} />
+          {t < q(2) + 2.68 ? (
+            <TeaDrawing
+              time={t}
+              x={155}
+              y={535}
+              width={770}
+              variant={
+                t >= 3.58
+                  ? "sip"
+                  : shot.acting === "wink" && t > 0.32 && t < 1.05
+                    ? "wink"
+                    : "neutral"
+              }
+            />
           ) : (
             <IntegratedTreatment time={t} x={-45} y={970} width={1320} />
           )}
@@ -781,7 +876,10 @@ function Scene({
               stroke={ink}
               strokeWidth="14"
             />
-            <g transform="translate(95 1660) rotate(-10 100 50)">
+            <g
+              transform={`translate(${95 + 210 * (1 - ease((a(2) + 0.05) / 0.35))} 1660) rotate(-10 100 50)`}
+              opacity={t < q(2) ? 0.0 : 1}
+            >
               <rect
                 width="200"
                 height="100"
@@ -807,6 +905,9 @@ function Scene({
                 fill="none"
                 stroke="#e2dace"
                 strokeWidth="7"
+                pathLength="1"
+                strokeDasharray="1"
+                strokeDashoffset={1 - ease((a(2) - 0.7) / 0.35)}
               />
             </g>
           </Svg>
@@ -842,7 +943,7 @@ function Scene({
             viewer
             y={620}
             s={1.1}
-            face={t % 4 > 3.8 ? "blink" : "neutral"}
+            face={shot.acting === "wink" ? "wink" : "neutral"}
           />
           <Text x={75} y={220} size={126}>
             AZI LASHES
@@ -852,9 +953,9 @@ function Scene({
           </Text>
           <Tag y={1510} w={890} size={65}>
             Вторжение вторжением,
-            <br />а ресничка сама себя
+            <br />а реснички сами себя
             <br />
-            не нарастит.
+            не нарастят.
           </Tag>
         </>
       )}
@@ -897,10 +998,12 @@ export function Film() {
           }}
         >
           <Scene n={s.scene} t={lt} d={s.end - s.start} cues={q} />
+          <SemanticLayer time={t} />
         </div>
         <EyeStrip shot={shot} time={t} />
         <ComicInset shot={shot} time={t} />
       </ShotContext.Provider>
+      <AnimeImpact time={t} shot={shot} />
       <AbsoluteFill
         style={{
           pointerEvents: "none",

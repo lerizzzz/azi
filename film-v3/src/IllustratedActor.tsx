@@ -7,7 +7,10 @@ import {
 } from "remotion";
 import type { ActorProps } from "./SeamlessRig";
 import manifest from "./illustrations.json";
-export type PerformanceProps = ActorProps & {acting?:string;cueAge?:number};
+export type PerformanceProps = ActorProps & {
+  acting?: string;
+  cueAge?: number;
+};
 
 type ArtKey = keyof typeof manifest;
 type Art = {
@@ -68,12 +71,13 @@ void main(){
   float planted=1.0-smoothstep(.76,.98,p.y);
   // A SINGLE shared-vertex surface: linework, silhouette, hair and skin cannot separate.
   float breath=sin(clock*1.7);
-  p.x+=.0015*sin(clock*1.15)*planted;
-  p.y-=.0012*breath*planted;
+  p.x+=.0040*sin(clock*1.15)*planted;
+  p.y-=.0024*breath*planted;
   p.x+=(p.x-.5)*.004*breath*bell(p,vec2(.5,.32),vec2(.55,.2));
   if(kind<1.5||kind>5.5){
     float hair=bell(p,vec2(.18,.32),vec2(.22,.23))+bell(p,vec2(.85,.31),vec2(.14,.22));
-    p.x+=.0045*sin(clock*2.1-p.y*5.0)*hair;
+    p.x+=.0100*sin(clock*2.1-p.y*5.0)*hair;
+    vec2 neck=p-vec2(.50,.20);float turn=.024*sin(clock*1.1)*(1.0-smoothstep(.17,.33,p.y));p+=vec2(-neck.y,neck.x)*turn;
   }
   if(kind>2.5&&kind<3.5){
     // Working hands and their forearms move together; no independent tool overlay.
@@ -254,20 +258,37 @@ function WarpedDrawing({
     />
   );
 }
-export function WholeDrawing(p:React.ComponentProps<typeof WarpedDrawing>){
-  if(p.kind===2){
-    const a=art[p.name],v=a.crop,bottom=v[1]+v[3],sy=1+Math.sin(p.time*1.7)*.0011;
-    return <svg width={p.width} height={p.height} viewBox={v.join(' ')} style={{position:'absolute',...p.style}}>
-      <g transform={`translate(0 ${bottom}) scale(1 ${sy}) translate(0 ${-bottom})`}>
-        <image href={staticFile(a.file)} width={a.head[4]} height={a.head[5]}/>
-      </g>
-    </svg>;
+export function WholeDrawing(p: React.ComponentProps<typeof WarpedDrawing>) {
+  if (p.kind === 2) {
+    const a = art[p.name],
+      v = a.crop,
+      bottom = v[1] + v[3],
+      sy = 1 + Math.sin(p.time * 1.7) * 0.0011;
+    return (
+      <svg
+        width={p.width}
+        height={p.height}
+        viewBox={v.join(" ")}
+        style={{ position: "absolute", ...p.style }}
+      >
+        <g
+          transform={`translate(0 ${bottom}) scale(1 ${sy}) translate(0 ${-bottom})`}
+        >
+          <image
+            href={staticFile(a.file)}
+            width={a.head[4]}
+            height={a.head[5]}
+          />
+        </g>
+      </svg>
+    );
   }
-  return <WarpedDrawing {...p}/>;
+  return <WarpedDrawing {...p} />;
 }
 
 export function chooseDrawing(p: PerformanceProps): ArtKey {
-  if (p.who === "alien") return p.acting==='question'?"alien-question":"alien";
+  if (p.who === "alien")
+    return p.acting === "question" ? "alien-question" : "alien";
   if (p.who === "master") return "master";
   if (p.who === "man")
     return (p.lift ?? 0) > 0.08 && p.phone === false
@@ -284,13 +305,16 @@ export function chooseDrawing(p: PerformanceProps): ArtKey {
     ];
   }
   if (p.action === "reach") return "azi-remove-shoes";
-  if (p.gesture === "ear") return p.acting==='talk'&&Math.sin(p.time*16)>.05?'azi-ear-speaking':"azi-ear";
+  if (p.gesture === "ear")
+    return p.acting === "talk" && Math.sin(p.time * 16) > 0.05
+      ? "azi-ear-speaking"
+      : "azi-ear";
   if (p.gesture === "hair") return "door-hair";
   if (p.gesture === "kiss") return "door-kiss";
-  if(p.acting==='relief'&&p.barefoot)return 'azi-relief';
-  if(p.acting==='idea'&&p.barefoot)return 'azi-idea';
-  if(p.acting==='startled'&&!p.barefoot)return 'azi-startled';
-  if(p.acting==='deadpan'&&!p.barefoot)return 'azi-deadpan';
+  if (p.acting === "relief" && p.barefoot) return "azi-relief";
+  if (p.acting === "idea" && p.barefoot) return "azi-idea";
+  if (p.acting === "startled" && !p.barefoot) return "azi-startled";
+  if (p.acting === "deadpan" && !p.barefoot) return "azi-deadpan";
   if (p.barefoot || p.shoes)
     return p.face === "blink" ? "azi-blink" : "azi-bare";
   return "azi-phone";
@@ -323,7 +347,15 @@ export function IllustratedActor(p: PerformanceProps) {
       }
       style={{
         left: x - w * a.anchor,
-        top: y + 625 * s - h,
+        top:
+          y +
+          625 * s -
+          h +
+          (p.acting === "startled"
+            ? Math.sin((p.cueAge ?? 10) * 24) *
+              Math.exp(-(p.cueAge ?? 10) * 15) *
+              7
+            : 0),
         transform:
           p.who === "man" && p.phone === false && (p.x ?? 0) > 650
             ? "scaleX(-1)"
@@ -341,15 +373,16 @@ export function IntegratedTreatment({
   x = 15,
   y = 950,
   width = 1050,
-  wipe=false,
+  wipe = false,
 }: {
   time: number;
   x?: number;
   y?: number;
   width?: number;
-  wipe?:boolean;
+  wipe?: boolean;
 }) {
-  const name=wipe?'treatment-wipe':'treatment',a = art[name];
+  const name = wipe ? "treatment-wipe" : "treatment",
+    a = art[name];
   return (
     <WholeDrawing
       name={name}
@@ -366,15 +399,17 @@ export function TeaDrawing({
   x = 115,
   y = 700,
   width = 850,
-  variant='neutral',
+  variant = "neutral",
 }: {
   time: number;
   x?: number;
   y?: number;
   width?: number;
-  variant?:'neutral'|'wink'|'sip';
+  variant?: "neutral" | "wink" | "sip";
 }) {
-  const name=variant==='wink'?'tea-wink':variant==='sip'?'tea-sip':'tea',a = art[name];
+  const name =
+      variant === "wink" ? "tea-wink" : variant === "sip" ? "tea-sip" : "tea",
+    a = art[name];
   return (
     <WholeDrawing
       name={name}
@@ -411,7 +446,19 @@ export function IllustratedFace({
           ? "master"
           : state === "blink"
             ? "azi-blink"
-            : "azi-bare";
+            : state === "wink"
+              ? "tea-wink"
+              : state === "smudge"
+                ? "azi-smudge"
+                : state === "startled"
+                  ? "azi-startled"
+                  : state === "deadpan"
+                    ? "azi-deadpan"
+                    : state === "idea"
+                      ? "azi-idea"
+                      : state === "relief"
+                        ? "azi-relief"
+                        : "azi-bare";
   const a = art[name];
   // A photographic crop of the WHOLE drawing, only for an inset. Never attached to a different body.
   return (

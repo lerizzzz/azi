@@ -88,5 +88,16 @@
       1774,
       887
     ]
+  },
+  {
+    "name": "studio-exterior",
+    "file": "v06/studio-exterior.png",
+    "bytes": 2082236,
+    "sha256": "2041c8ee88885678f28c300b81a4241659e3476397f130e593afa78340195dcf",
+    "dimensions": [
+      941,
+      1672
+    ],
+    "role": "architecturally attached curtained window, replacing rejected floating vector panel"
   }
 ]
